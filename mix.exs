@@ -46,7 +46,7 @@ defmodule ExPesa.MixProject do
   defp deps do
     [
       {:tesla, "~> 1.3.0"},
-      {:gun, "~> 1.15.2"},
+      {:gun, "~> 1.3.2"},
       {:jason, ">= 1.0.0"},
       {:timex, "~> 3.5"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}
