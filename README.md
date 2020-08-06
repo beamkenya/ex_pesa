@@ -15,6 +15,16 @@
 
 ## Features
 
+[WIP]
+
+- [x] Mpesa
+  - [x] STK push
+  - [ ] B2C
+  - [ ] B2B
+  - [ ] C2B
+- [ ] Equity
+- [ ] Paypal
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -27,8 +37,6 @@ def deps do
   ]
 end
 ```
-
-## Configuration
 
 ## Configuration
 
