@@ -33,7 +33,7 @@ defmodule ExPesa.Mpesa.Stk do
 
   ## Example
 
-      iex> ExPesa.Mpesa.Stk.request(%{amount: 10, phone: "254724540039", reference: "reference", description: "description"})
+      iex> ExPesa.Mpesa.Stk.request(%{amount: 10, phone: "254724540000", reference: "reference", description: "description"})
       {:ok,
         %{
         "CheckoutRequestID" => "ws_CO_010320202011179845",

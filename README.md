@@ -40,19 +40,16 @@ end
 
 ## Configuration
 
+Create a copy of `config/dev.exs` or `config/prod.exs` form `config/dev.sample.exs`
+
 ### Mpesa (Daraja)
 
 Add below config to dec.exs / prod.exs files
 This asumes you have a clear understanding of how Daraja API works.
 
-The `env` is either `sandbox` or `production`
-
-`dev.exs` These are sandbox credentials given by Safaricom
-
 ```elixir
 config :ex_pesa,
     mpesa: [
-        env: "sandbox",
         consumer_key: "72yw1nun6g1QQPPgOsAObCGSfuimGO7b",
         consumer_secret: "vRzZiD5RllMLIdLD",
         mpesa_short_code: "174379",
@@ -70,5 +67,3 @@ The docs can be found at [https://hexdocs.pm/ex_pesa](https://hexdocs.pm/ex_pesa
 ExPesa is released under [MIT License](https://github.com/appcues/exsentry/blob/master/LICENSE.txt)
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)](#)
-
-[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source-200x33.png?v=103)](#)

@@ -1,9 +1,9 @@
 use Mix.Config
+config :tesla, adapter: Tesla.Adapter.Hackney
 
 config :ex_pesa,
   force_live_url: "NO",
   mpesa: [
-    env: "sandbox",
     consumer_key: "72yw1nun6g1QQPPgOsAObCGSfuimGO7b",
     consumer_secret: "vRzZiD5RllMLIdLD",
     mpesa_short_code: "174379",
