@@ -20,8 +20,6 @@ defmodule ExPesa.Mpesa.MpesaBase do
        [{"Authorization", "Basic " <> token}, {"Content-Type", "application/json"}]}
     ]
 
-    # adapter = {Tesla.Adapter.Gun, [recv_timeout: 30_000]}
-
     Tesla.client(middleware)
   end
 
@@ -50,8 +48,6 @@ defmodule ExPesa.Mpesa.MpesaBase do
       {Tesla.Middleware.Headers,
        [{"Authorization", "Bearer " <> token}, {"Content-Type", "application/json"}]}
     ]
-
-    # adapter = {Tesla.Adapter.Gun, [recv_timeout: 30_000]}
 
     Tesla.client(middleware)
   end
