@@ -1,5 +1,7 @@
 defmodule ExPesa.Mpesa.Stk do
-  @moduledoc false
+  @moduledoc """
+  Lipa na M-Pesa Online Payment API is used to initiate a M-Pesa transaction on behalf of a customer using STK Push. This is the same technique mySafaricom App uses whenever the app is used to make payments.
+  """
 
   import ExPesa.Mpesa.MpesaBase
 

@@ -10,6 +10,7 @@
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Documentation](#documentation)
+- [Contribution](#contribution)
 - [Author](#author)
 - [Licence](#licence)
 
@@ -41,6 +42,13 @@ end
 ## Configuration
 
 Create a copy of `config/dev.exs` or `config/prod.exs` form `config/dev.sample.exs`
+
+## Contribution
+
+If you'd like to contribute, start by searching through the [issues](https://github.com/beamkenya/ex_pesa/issues) and [pull requests](https://github.com/beamkenya/ex_pesa/pulls) to see whether someone else has raised a similar idea or question.
+If you don't see your idea listed, [Open an issue](https://github.com/beamkenya/ex_pesa/issues).
+
+Check the [Contribution guide](contributing.md) on how to contribute.
 
 ### Mpesa (Daraja)
 
