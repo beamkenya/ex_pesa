@@ -1,0 +1,34 @@
+name: Elixir CI
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  check-lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Create dev file
+      run: mv config/dev.sample.exs config/dev.exs
+    - name: Setup elixir
+      uses: actions/setup-elixir@v1
+      with:
+        elixir-version: '1.9.4'
+        otp-version: '22.2'
+    - name: Install Dependencies
+      run: mix deps.get
+    - name: Run Tests
+      run: mix test
+    - name: Check formatting
+      run: mix format --check-formatted
+    - name: Checking compile warnings
+      run: mix compile --warnings-as-errors --force
