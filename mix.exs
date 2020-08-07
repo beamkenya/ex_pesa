@@ -5,7 +5,7 @@ defmodule ExPesa.MixProject do
     [
       app: :ex_pesa,
       version: "0.1.0",
-      elixir: "~> 1.10",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       description: "This is a Payments Library",
       package: package(),
