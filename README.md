@@ -1,8 +1,8 @@
 ##### [badges][badges]
 
-# ExPesa
+# ExPesa :dollar: :pound: :yen: :euro:
 
-> Payment Library
+> Payment Library For Most Public Payment API's in Kenya and hopefully Africa. Let us get this :moneybag:
 
 ## Table of contents
 
@@ -22,7 +22,14 @@
   - [ ] B2C
   - [ ] B2B
   - [ ] C2B
-- [ ] Equity
+- [ ] JengaWS(Equity)
+  - [ ] Send Money
+  - [ ] Receive Payments
+  - [ ] Buy Goods, Pay Bills, Get Airtime
+  - [ ] Credit
+  - [ ] Reg Tech: KYC, AML, & CDD API
+  - [ ] Account Services
+  
 - [ ] Paypal
 
 ## Installation
