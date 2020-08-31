@@ -77,4 +77,63 @@ defmodule ExPesa.Mpesa.Stk do
   def request(_) do
     {:error, "Required Parameters missing, 'phone, 'amount', 'reference', 'description'"}
   end
+
+  @doc """
+  STK PUSH Transaction Validation
+
+  ## Configuration
+
+  Add below config to dev.exs / prod.exs files (at this stage after STK, the config keys should be there)
+  This asumes you have a clear understanding of how Daraja API works. See docs here https://developer.safaricom.co.ke/docs#lipa-na-m-pesa-online-query-request
+
+  `config.exs`
+  ```elixir
+    config :ex_pesa,
+        mpesa: [
+            consumer_key: "",
+            consumer_secret: "",
+            mpesa_short_code: "",
+            mpesa_passkey: "",
+        ]
+  ```
+
+  ## Parameters
+
+  attrs: - a map containing:
+  - `checkout_request_id` - Checkout RequestID.
+
+  ## Example
+
+      iex> ExPesa.Mpesa.Stk.validate(%{checkout_request_id: "ws_CO_260820202102496165"})
+      {:ok,
+        %{
+          "CheckoutRequestID" => "ws_CO_260820202102496165",
+          "MerchantRequestID" => "11130-78831728-4",
+          "ResponseCode" => "0",
+          "ResponseDescription" => "The service request has been accepted successsfully",
+          "ResultCode" => "1032", 
+          "ResultDesc" => "Request cancelled by user"
+        }
+      }
+  """
+  @spec validate(map()) :: {:error, any()} | {:ok, any()}
+  def validate(%{checkout_request_id: checkout_request_id}) do
+    paybill = Application.get_env(:ex_pesa, :mpesa)[:mpesa_short_code]
+    passkey = Application.get_env(:ex_pesa, :mpesa)[:mpesa_passkey]
+    {:ok, timestamp} = Timex.now() |> Timex.format("%Y%m%d%H%M%S", :strftime)
+    password = Base.encode64(paybill <> passkey <> timestamp)
+
+    payload = %{
+      "BusinessShortCode" => paybill,
+      "Password" => password,
+      "Timestamp" => timestamp,
+      "CheckoutRequestID" => checkout_request_id
+    }
+
+    make_request("/mpesa/stkpushquery/v1/query", payload)
+  end
+
+  def validate(_) do
+    {:error, "Required Parameter missing, 'CheckoutRequestID'"}
+  end
 end
