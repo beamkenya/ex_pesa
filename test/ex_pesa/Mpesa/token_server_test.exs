@@ -9,11 +9,11 @@ defmodule ExPesa.Mpesa.TokenServerTest do
   #   end
 
   test "stores and retrieves token" do
-    org_token = 'tsdgu66t327uygfe'
+    org_token = "SGWcJPtNtYNPGm6uSYR9yPYrAI3Bm"
     TokenServer.insert({org_token, DateTime.add(DateTime.utc_now(), 3550, :second)})
 
     assert {token, datetime} = TokenServer.get()
-    assert token === 'tsdgu66t327uygfe'
+    assert token === org_token
     assert DateTime.compare(datetime, DateTime.utc_now()) !== :g
   end
 end
