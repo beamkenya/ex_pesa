@@ -1,4 +1,4 @@
-##### [badges][badges]
+[![Actions Status](https://github.com/beamkenya/ex_pesa/workflows/Elixir%20CI/badge.svg)](https://github.com/beamkenya/ex_pesa/actions) &nbsp; ![Hex.pm](https://img.shields.io/hexpm/v/ex_pesa) &nbsp; ![Hex.pm](https://img.shields.io/hexpm/dt/ex_pesa)
 
 # ExPesa :dollar: :pound: :yen: :euro:
 
@@ -11,6 +11,7 @@
 - [Configuration](#configuration)
 - [Documentation](#documentation)
 - [Contribution](#contribution)
+- [Contributors](#contributors)
 - [Licence](#licence)
 
 ## Features
@@ -18,10 +19,14 @@
 [WIP]
 
 - [x] Mpesa
-  - [x] STK push
+  - [x] Mpesa Express (STK)
+  - [x] STK Transaction Validation
   - [ ] B2C
   - [ ] B2B
   - [ ] C2B
+  - [ ] Reversal
+  - [ ] Transaction Status
+  - [ ] Account Balance
 - [ ] JengaWS(Equity)
   - [ ] Send Money
   - [ ] Receive Payments
@@ -29,8 +34,8 @@
   - [ ] Credit
   - [ ] Reg Tech: KYC, AML, & CDD API
   - [ ] Account Services
-  
 - [ ] Paypal
+- [ ] Card
 
 ## Installation
 
@@ -69,12 +74,37 @@ config :ex_pesa,
 
 The docs can be found at [https://hexdocs.pm/ex_pesa](https://hexdocs.pm/ex_pesa).
 
+### Quick Examples
+
+#### Mpesa Express (STK)
+
+```elixir
+  iex> ExPesa.Mpesa.Stk.request(%{amount: 10, phone: "254724540000", reference: "reference", description: "description"})
+      {:ok,
+        %{
+        "CheckoutRequestID" => "ws_CO_010320202011179845",
+        "CustomerMessage" => "Success. Request accepted for processing",
+        "MerchantRequestID" => "25558-10595705-4",
+        "ResponseCode" => "0",
+        "ResponseDescription" => "Success. Request accepted for processing"
+        }}
+```
+
 ## Contribution
 
 If you'd like to contribute, start by searching through the [issues](https://github.com/beamkenya/ex_pesa/issues) and [pull requests](https://github.com/beamkenya/ex_pesa/pulls) to see whether someone else has raised a similar idea or question.
 If you don't see your idea listed, [Open an issue](https://github.com/beamkenya/ex_pesa/issues).
 
 Check the [Contribution guide](contributing.md) on how to contribute.
+
+## Contributors
+
+Auto-populated from:
+[contributors-img](https://contributors-img.firebaseapp.com/image?repo=beamkenya/ex_pesa)
+
+<a href="https://github.com/beamkenya/ex_pesa/graphs/contributors">
+  <img src="https://contributors-img.firebaseapp.com/image?repo=beamkenya/ex_pesa" />
+</a>
 
 ## Licence
 
