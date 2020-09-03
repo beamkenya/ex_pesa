@@ -1,4 +1,4 @@
-<p align="left"><img src="assets/logo.png" width="170"></p>
+<p align="left"><img src="assets/logo.png" width="140"></p>
 
 [![Actions Status](https://github.com/beamkenya/ex_pesa/workflows/Elixir%20CI/badge.svg)](https://github.com/beamkenya/ex_pesa/actions) ![Hex.pm](https://img.shields.io/hexpm/v/ex_pesa) ![Hex.pm](https://img.shields.io/hexpm/dt/ex_pesa)
 
