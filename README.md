@@ -1,4 +1,6 @@
-[![Actions Status](https://github.com/beamkenya/ex_pesa/workflows/Elixir%20CI/badge.svg)](https://github.com/beamkenya/ex_pesa/actions) &nbsp; ![Hex.pm](https://img.shields.io/hexpm/v/ex_pesa) &nbsp; ![Hex.pm](https://img.shields.io/hexpm/dt/ex_pesa)
+<p align="left"><img src="assets/logo.png" width="170"></p>
+
+[![Actions Status](https://github.com/beamkenya/ex_pesa/workflows/Elixir%20CI/badge.svg)](https://github.com/beamkenya/ex_pesa/actions) ![Hex.pm](https://img.shields.io/hexpm/v/ex_pesa) ![Hex.pm](https://img.shields.io/hexpm/dt/ex_pesa)
 
 # ExPesa :dollar: :pound: :yen: :euro:
 
