@@ -7,31 +7,34 @@ defmodule ExPesa.MixProject do
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
-      description: "This is a Payments Library",
+      description: "Payment Library For Most Public Payment API's in Kenya and hopefully Africa.",
       package: package(),
       deps: deps(),
-      name: "ex_pesa",
+      name: "ExPesa",
       source_url: "https://github.com/beamkenya/ex_pesa.git",
-      homepage_url: "https://hexdocs.pm/ex_pesa/ExPesa.html",
       docs: [
         # The main page in the docs
-        main: "ex_pesa",
-        # logo:
-        #   "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1200px-M-PESA_LOGO-01.svg.png",
-        extras: ["README.md"]
+        main: "readme",
+        canonical: "http://hexdocs.pm/at_ex",
+        source_url: "https://github.com/beamkenya/ex_pesa.git",
+        logo: "assets/logo.png",
+        assets: "assets",
+        extras: ["README.md", "contributing.md"]
       ]
     ]
   end
 
   defp package do
     [
-      maintainers: ["Beam Kenya"],
+      name: "ex_pesa",
+      maintainers: ["Paul Oguda, Magak Emmanuel, Frank Midigo, Tracey Onim"],
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/beamkenya/ex_pesa.git",
         "Documentation" => "https://hexdocs.pm/ex_pesa/ExPesa.html",
         "README" => "https://hexdocs.pm/ex_pesa/readme.html"
-      }
+      },
+      homepage_url: "https://github.com/elixirkenya/africastalking-elixir"
     ]
   end
 
