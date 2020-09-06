@@ -54,12 +54,12 @@ end
 
 ## Configuration
 
-Create a copy of `config/dev.exs` or `config/prod.exs` form `config/dev.sample.exs`
+Create a copy of `config/dev.exs` or `config/prod.exs` from `config/dev.sample.exs`
 
 ### Mpesa (Daraja)
 
-Add below config to dec.exs / prod.exs files
-This asumes you have a clear understanding of how Daraja API works.
+Add below config to dev.exs / prod.exs files
+This asumes you have a clear understanding of how [Daraja API works](https://developer.safaricom.co.ke/get-started).
 
 ```elixir
 config :ex_pesa,
