@@ -31,7 +31,6 @@ defmodule ExPesa.MixProject do
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/beamkenya/ex_pesa.git",
-        "Documentation" => "https://hexdocs.pm/ex_pesa/ExPesa.html",
         "README" => "https://hexdocs.pm/ex_pesa/readme.html"
       },
       homepage_url: "https://github.com/elixirkenya/africastalking-elixir"
