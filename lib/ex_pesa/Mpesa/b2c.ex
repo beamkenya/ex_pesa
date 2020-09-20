@@ -15,32 +15,33 @@ defmodule ExPesa.Mpesa.B2c do
 
   """
 
-  def initiate_request(%{
-        username: username,
+  def request(%{
         command_id: command_id,
         amount: amount,
         phone_number: phone_number,
         remarks: remarks,
         occassion: occassion
       }) do
-    short_code = Application.get_env(:ex_pesa, :mpesa)[:mpesa_short_code]
-    passkey = Application.get_env(:ex_pesa, :mpesa)[:mpesa_passkey]
-    {:ok, timestamp} = Timex.now() |> Timex.format("%Y%m%d%H%M%S", :strftime)
-    credential = Base.encode64(short_code <> passkey <> timestamp)
-
     payload = %{
-      "InitiatorName" => username,
-      "SecurityCredential" => credential,
+      "InitiatorName" => Application.get_env(:ex_pesa, :mpesa)[:b2c_initiator_name],
+      "SecurityCredential" => _security_credential(),
       "CommandID" => command_id,
       "Amount" => amount,
-      "PartyA" => short_code,
+      "PartyA" => Application.get_env(:ex_pesa, :mpesa)[:b2c_partyA],
       "PartyB" => phone_number,
       "Remarks" => remarks,
-      "QueueTimeOutURL" => Application.get_env(:ex_pesa, :mpesa)[:mpesa_callback_url],
-      "ResultURL" => Application.get_env(:ex_pesa, :mpesa)[:mpesa_callback_url],
+      "QueueTimeOutURL" => Application.get_env(:ex_pesa, :mpesa)[:b2c_timeout_url],
+      "ResultURL" => Application.get_env(:ex_pesa, :mpesa)[:b2c_result_url],
       "Occassion" => occassion
     }
 
     make_request("/mpesa/b2c/v1/paymentrequest", payload)
+  end
+
+  defp _security_credential do
+    case Application.get_env(:ex_pesa, :mpesa)[:b2c_security_credential] do
+      "" -> "generate"
+      credential -> credential
+    end
   end
 end
