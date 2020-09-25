@@ -10,8 +10,7 @@ defmodule ExPesa.Mpesa.C2BTest do
 
   setup do
     mock(fn
-
-          %{
+      %{
         url: "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
         method: :get
       } ->
@@ -22,6 +21,7 @@ defmodule ExPesa.Mpesa.C2BTest do
             "expires_in" => "3599"
           }
         }
+
       %{
         url: "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl",
         method: :post
@@ -35,16 +35,14 @@ defmodule ExPesa.Mpesa.C2BTest do
           }
         }
 
-
-     %{url: "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate", method: :post} ->
+      %{url: "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate", method: :post} ->
         %Tesla.Env{
           status: 200,
-          body:
-          %{
-              "ConversationID" => "AG_20200921_00006e93a78f009f7025",
-              "OriginatorCoversationID" => "9769-145819182-2",
-              "ResponseDescription" => "Accept the service request successfully."
-            }
+          body: %{
+            "ConversationID" => "AG_20200921_00006e93a78f009f7025",
+            "OriginatorCoversationID" => "9769-145819182-2",
+            "ResponseDescription" => "Accept the service request successfully."
+          }
         }
     end)
 
@@ -64,23 +62,29 @@ defmodule ExPesa.Mpesa.C2BTest do
       assert result["ResponseDescription"] == "success"
     end
 
+    test "request/1 should error out without required parameter" do
+      {:error, result} = C2B.registerurl(%{})
+      "Required Parameter missing, 'ConfirmationURL', 'ValidationURL','ResponseType'" = result
+    end
 
-  test "request/1 should error out without required parameter" do
-    {:error, result} = C2B.registerurl(%{})
-    "Required Parameter missing, 'ConfirmationURL', 'ValidationURL','ResponseType'" = result
-  end
+    test "simulate/1 should send money successfully" do
+      {:ok, result} =
+        C2B.simulate(%{
+          command_id: "CustomerPayBillOnline",
+          phone_number: "254728833100",
+          amount: 10,
+          bill_reference: "Some Reference"
+        })
 
-  test "simulate/1 should send money successfully" do
-    {:ok, result} = C2B.simulate(%{command_id: "CustomerPayBillOnline", phone_number: "254728833100", amount: 10, bill_reference: "Some Reference" })
-    IO.inspect(result)
+      IO.inspect(result)
 
-    assert result["OriginatorCoversationID"] == "9769-145819182-2"
-    assert result["ResponseDescription"] == "Accept the service request successfully."
-  end
+      assert result["OriginatorCoversationID"] == "9769-145819182-2"
+      assert result["ResponseDescription"] == "Accept the service request successfully."
+    end
 
-  test "validate/1 should error out without required parameter" do
-    {:error, result} = C2B.simulate(%{})
-    "Required Parameter missing, 'CommandID','Amount','Msisdn', 'BillRefNumber'" = result
-  end
+    test "validate/1 should error out without required parameter" do
+      {:error, result} = C2B.simulate(%{})
+      "Required Parameter missing, 'CommandID','Amount','Msisdn', 'BillRefNumber'" = result
+    end
   end
 end
