@@ -88,7 +88,7 @@ defmodule ExPesa.Mpesa.C2B do
         amount: amount,
         bill_reference: bill_reference
       }) do
-    paybill = Application.get_env(:ex_pesa, :mpesa)[:mpesa_short_code]
+    paybill = Application.get_env(:ex_pesa, :mpesa)[:c2b_short_code]
 
     payload = %{
       "ShortCode" => paybill,
