@@ -10,7 +10,7 @@ defmodule ExPesa.Mpesa.Stk do
 
   ## Configuration
 
-  Add below config to dev.exs / prod.exs files 
+  Add below config to dev.exs / prod.exs files
   This asumes you have a clear understanding of how Daraja API works. See docs here https://developer.safaricom.co.ke/docs#lipa-na-m-pesa-online-payment
 
   `config.exs`
@@ -111,7 +111,7 @@ defmodule ExPesa.Mpesa.Stk do
           "MerchantRequestID" => "11130-78831728-4",
           "ResponseCode" => "0",
           "ResponseDescription" => "The service request has been accepted successsfully",
-          "ResultCode" => "1032", 
+          "ResultCode" => "1032",
           "ResultDesc" => "Request cancelled by user"
         }
       }
