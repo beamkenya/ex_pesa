@@ -11,8 +11,8 @@ defmodule ExPesa.Mpesa.B2B do
 
   ## Configuration
 
-  Add below config to dev.exs / prod.exs files (at this stage after STK, the config keys should be there)
-  This asumes you have a clear understanding of how Daraja API works. See docs here https://developer.safaricom.co.ke/docs#lipa-na-m-pesa-online-query-request
+  Add below config to dev.exs / prod.exs files
+  This asumes you have a clear understanding of how Daraja API works. See docs here https://developer.safaricom.co.ke/docs#b2b-api
 
   `config.exs`
   ```elixir
