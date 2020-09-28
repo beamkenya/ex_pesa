@@ -2,7 +2,8 @@ use Mix.Config
 config :tesla, adapter: Tesla.Adapter.Hackney
 
 config :ex_pesa,
-  force_live_url: "NO",
+  # When changed to "false" one will use the live endpoint url
+  sandbox: true,
   mpesa: [
     consumer_key: "72yw1nun6g1QQPPgOsAObCGSfuimGO7b",
     consumer_secret: "vRzZiD5RllMLIdLD",
