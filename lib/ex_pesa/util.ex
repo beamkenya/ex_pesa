@@ -5,8 +5,8 @@ defmodule ExPesa.Util do
   @spec get_url(String.t(), String.t()) :: String.t()
   def get_url(live_url, sandbox_url) do
     cond do
-      Mix.env() == :prod -> live_url
-      Application.get_env(:ex_pesa, :force_live_url) == "YES" -> live_url
+      Application.get_env(:ex_pesa, :sandbox) === false -> live_url
+      Application.get_env(:ex_pesa, :sandbox) === true -> sandbox_url
       true -> sandbox_url
     end
   end

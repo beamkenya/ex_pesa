@@ -55,11 +55,16 @@ end
 ## Configuration
 
 Create a copy of `config/dev.exs` or `config/prod.exs` from `config/dev.sample.exs`
+Use the `sandbox` key to `true` when you are using sandbox credentials, chnage to `false` when going to `:prod`
 
 ### Mpesa (Daraja)
 
+Mpesa Daraja API link: https://developer.safaricom.co.ke
+
 Add below config to dev.exs / prod.exs files
 This asumes you have a clear understanding of how [Daraja API works](https://developer.safaricom.co.ke/get-started).
+
+You can also refer to this Safaricom Daraja API Tutorial: https://peternjeru.co.ke/safdaraja/ui/ by Peter Njeru
 
 ```elixir
 config :ex_pesa,
