@@ -95,7 +95,7 @@ defmodule ExPesa.Mpesa.B2B do
 
   def request() do
     {:error,
-     "Required Parameter missing, 'CommandID','Amount','PartyB', 'Remarks','AccountReference'"}
+     "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks','account_reference'"}
   end
 
   defp b2b_request(security_credential, %{

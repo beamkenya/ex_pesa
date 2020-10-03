@@ -58,7 +58,7 @@ defmodule ExPesa.Mpesa.B2BTest do
     test "request/1 should error out without required parameter" do
       {:error, result} = B2B.request()
 
-      "Required Parameter missing, 'CommandID','Amount','PartyB', 'Remarks','AccountReference'" =
+      "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks','account_reference'" =
         result
     end
   end
