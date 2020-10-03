@@ -8,11 +8,9 @@ defmodule ExPesa.Mpesa.B2B do
 
   @doc """
   This API enables Business to Business (B2B) transactions between a business and another business. Use of this API requires a valid and verified B2B M-Pesa short code for the business initiating the transaction and the both businesses involved in the transaction.
-  
   ## Configuration
   Add below config to dev.exs / prod.exs files
   This asumes you have a clear understanding of how Daraja API works. See docs here https://developer.safaricom.co.ke/docs#b2b-api
-
   #### B2B - Configuration Parameters
   - `initiator` - This is the credential/username used to authenticate the transaction request.
     Environment
@@ -27,7 +25,6 @@ defmodule ExPesa.Mpesa.B2B do
   - `security credential` - To generate security_credential, head over to https://developer.safaricom.co.ke/test_credentials, then Initiator Security Password for your environment
     - Test - use the above test security credential
     - Production - use the actual production security credential
-
     `config.exs`
     ```elixir
       config :ex_pesa,
@@ -64,8 +61,6 @@ defmodule ExPesa.Mpesa.B2B do
               ]
           ]
     ```
-
-
   ## Parameters
   attrs: - a map containing:
   - `command_id` - Unique command for each transaction type, possible values are: BusinessPayBill, MerchantToMerchantTransfer, MerchantTransferFromMerchantToWorking, MerchantServicesMMFAccountTransfer, AgencyFloatAdvance
@@ -73,8 +68,6 @@ defmodule ExPesa.Mpesa.B2B do
   - `receiver_party` - Organization’s short code receiving the funds being transacted
   - `remarks` - Comments that are sent along with the transaction.
   - `account_reference` - Account Reference mandatory for “BusinessPaybill” CommandID.
-
-
   ## Example
       iex> ExPesa.Mpesa.B2B.request(%{command_id: "BusinessPayBill", amount: 10500, receiver_party: 600000, remarks: "B2B Request", account_reference: "BILL PAYMENT"})
       {:ok,
@@ -93,14 +86,18 @@ defmodule ExPesa.Mpesa.B2B do
     end
   end
 
-  @doc false
+  def request() do
+    {:error,
+     "Required Parameter missing, 'CommandID','Amount','PartyB', 'Remarks','AccountReference'"}
+  end
+
   defp b2b_request(security_credential, %{
-        command_id: command_id,
-        amount: amount,
-        receiver_party: receiver_party,
-        remarks: remarks,
-        account_reference: account_reference
-      }) do
+         command_id: command_id,
+         amount: amount,
+         receiver_party: receiver_party,
+         remarks: remarks,
+         account_reference: account_reference
+       }) do
     payload = %{
       "Initiator" => Application.get_env(:ex_pesa, :mpesa)[:b2b][:initiator_name],
       "SecurityCredential" => security_credential,

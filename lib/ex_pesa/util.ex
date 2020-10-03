@@ -123,16 +123,14 @@ defmodule ExPesa.Util do
   end
 
   def get_security_credential_for(key) do
-    securityCredential = Application.get_env(:ex_pesa, :mpesa)[key][:security_credential]
-
-    cond do
-      securityCredential === "" || securityCredential === nil ->
+    case Application.get_env(:ex_pesa, :mpesa)[key][:security_credential] do
+      nil ->
         cert = Application.get_env(:ex_pesa, :mpesa)[:cert]
         password = Application.get_env(:ex_pesa, :mpesa)[key][:password]
         generate_security_credential(%{CertFile: cert, Password: password})
 
-      securityCredential ->
-        securityCredential
+      credential ->
+        credential
     end
   end
 end
