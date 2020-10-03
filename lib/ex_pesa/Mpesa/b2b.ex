@@ -86,13 +86,18 @@ defmodule ExPesa.Mpesa.B2B do
     end
   end
 
-  def b2b_request(security_credential, %{
-        command_id: command_id,
-        amount: amount,
-        receiver_party: receiver_party,
-        remarks: remarks,
-        account_reference: account_reference
-      }) do
+  def request() do
+    {:error,
+     "Required Parameter missing, 'CommandID','Amount','PartyB', 'Remarks','AccountReference'"}
+  end
+
+  defp b2b_request(security_credential, %{
+         command_id: command_id,
+         amount: amount,
+         receiver_party: receiver_party,
+         remarks: remarks,
+         account_reference: account_reference
+       }) do
     payload = %{
       "Initiator" => Application.get_env(:ex_pesa, :mpesa)[:b2b][:initiator_name],
       "SecurityCredential" => security_credential,
