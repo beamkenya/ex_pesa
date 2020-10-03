@@ -7,7 +7,7 @@ defmodule ExPesa.Mpesa.B2B do
   import ExPesa.Util
 
   @doc """
-  This API enables Business to Business (B2B) transactions between a business and another business. Use of this API requires a valid and verified B2B M-Pesa short code for the business initiating the transaction and the both businesses involved in the transaction.
+  Initiates the Mpesa B2B .
 
   ## Configuration
   Add below config to dev.exs / prod.exs files
@@ -16,17 +16,16 @@ defmodule ExPesa.Mpesa.B2B do
   #### B2B - Configuration Parameters
   - `initiator` - This is the credential/username used to authenticate the transaction request.
     Environment
-      - production -
-        - create a user with api access method (access channel)
-        - Enter user name
-        - assign business manager role and B2B ORG API initiator role.
-      Use the username from your notifitation channel (SMS)
-      - sandbox - use your own custom username
-  - `timeout_url' - The path that stores information of time out transactions.it should be properly validated to make sure that it contains the port, URI and domain name or publicly available IP.
+    - production 
+      - create a user with api access method (access channel)
+      - Enter user name
+      - assign business manager role and B2B ORG API initiator role.
+    Use the username from your notifitation channel (SMS)
+    - sandbox - use your own custom username.
+
+  - `timeout_url` - The path that stores information of time out transactions.it should be properly validated to make sure that it contains the port, URI and domain name or publicly available IP.
   - `result_url` - The path that receives results from M-Pesa it should be properly validated to make sure that it contains the port, URI and domain name or publicly available IP.
-  - `security credential` - To generate security_credential, head over to https://developer.safaricom.co.ke/test_credentials, then Initiator Security Password for your environment
-    - Test - use the above test security credential
-    - Production - use the actual production security credential
+  - `security credential` - To generate security_credential, head over to https://developer.safaricom.co.ke/test_credentials, then Initiator Security Password for your environment.
 
     `config.exs`
     ```elixir
@@ -45,8 +44,8 @@ defmodule ExPesa.Mpesa.B2B do
   Alternatively, generate security credential using certificate
     `cert` - This is the M-Pesa public key certificate used to encrypt your plain password.
     There are 2 types of certificates.
-      - sandox - https://developer.safaricom.co.ke/sites/default/files/cert/cert_sandbox/cert.cer
-      - production - https://developer.safaricom.co.ke/sites/default/files/cert/cert_prod/cert.cer
+      - sandox - https://developer.safaricom.co.ke/sites/default/files/cert/cert_sandbox/cert.cer .
+      - production - https://developer.safaricom.co.ke/sites/default/files/cert/cert_prod/cert.cer .
     `password` - This is a plain unencrypted password.
     Environment
       - production - set password from the organization portal.
@@ -68,12 +67,13 @@ defmodule ExPesa.Mpesa.B2B do
     ```
 
   ## Parameters
+
   attrs: - a map containing:
-  - `command_id` - Unique command for each transaction type, possible values are: BusinessPayBill, MerchantToMerchantTransfer, MerchantTransferFromMerchantToWorking, MerchantServicesMMFAccountTransfer, AgencyFloatAdvance
+  - `command_id` - Unique command for each transaction type, possible values are: BusinessPayBill, MerchantToMerchantTransfer, MerchantTransferFromMerchantToWorking, MerchantServicesMMFAccountTransfer, AgencyFloatAdvance.
   - `amount` - The amount being transacted.
-  - `receiver_party` - Organization’s short code receiving the funds being transacted
+  - `receiver_party` - Organization’s short code receiving the funds being transacted.
   - `remarks` - Comments that are sent along with the transaction.
-  - `account_reference` - Account Reference mandatory for “BusinessPaybill” CommandID.
+  - `account_reference` - Account Reference mandatory for "BusinessPaybill" CommandID.
 
   ## Example
       iex> ExPesa.Mpesa.B2B.request(%{command_id: "BusinessPayBill", amount: 10500, receiver_party: 600000, remarks: "B2B Request", account_reference: "BILL PAYMENT"})
@@ -93,6 +93,7 @@ defmodule ExPesa.Mpesa.B2B do
     end
   end
 
+  @doc false
   def request() do
     {:error,
      "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks','account_reference'"}
