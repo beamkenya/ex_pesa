@@ -76,8 +76,6 @@ defmodule ExPesa.Mpesa.C2BTest do
           bill_reference: "Some Reference"
         })
 
-      IO.inspect(result)
-
       assert result["OriginatorCoversationID"] == "9769-145819182-2"
       assert result["ResponseDescription"] == "Accept the service request successfully."
     end
