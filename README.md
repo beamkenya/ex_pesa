@@ -24,8 +24,8 @@
   - [x] Mpesa Express (STK)
   - [x] STK Transaction Validation
   - [ ] B2C
-  - [ ] B2B
-  - [ ] C2B
+  - [x] B2B
+  - [x] C2B
   - [ ] Reversal
   - [ ] Transaction Status
   - [ ] Account Balance
