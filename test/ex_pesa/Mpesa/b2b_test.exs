@@ -41,7 +41,7 @@ defmodule ExPesa.Mpesa.B2BTest do
   end
 
   describe "Mpesa B2B" do
-    test "request/1 should register a URL" do
+    test "request/1 should Initiate a B2B request" do
       payment_details = %{
         command_id: "BusinessPayBill",
         amount: 10500,
