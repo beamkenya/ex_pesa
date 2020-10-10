@@ -28,7 +28,7 @@
   - [x] C2B
   - [ ] Reversal
   - [ ] Transaction Status
-  - [ ] Account Balance
+  - [x] Account Balance
 - [ ] JengaWS(Equity)
   - [ ] Send Money
   - [ ] Receive Payments

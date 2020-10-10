@@ -93,7 +93,6 @@ defmodule ExPesa.Mpesa.B2B do
     end
   end
 
-  @doc false
   def request() do
     {:error,
      "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks','account_reference'"}
