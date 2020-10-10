@@ -42,23 +42,9 @@ defmodule ExPesa.Mpesa.AccountBalanceTest do
 
   describe "Mpesa AccountBalance" do
     test "request/1 should Initiate a AccountBalance request" do
-      payment_details = %{
-        command_id: "AccountBalance",
-        short_code: "602843",
-        remarks: "remarks",
-        account_type: "Customer"
-      }
-
-      {:ok, result} = AccountBalance.request(payment_details)
+      {:ok, result} = AccountBalance.request()
 
       assert result["ResponseCode"] == "0"
-    end
-
-    test "request/1 should error out without required parameter" do
-      {:error, result} = AccountBalance.request()
-
-      "Required Parameter missing, 'command_id','short_code', 'remarks','account_reference'" =
-        result
     end
   end
 end

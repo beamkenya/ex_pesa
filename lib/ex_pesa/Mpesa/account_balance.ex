@@ -19,6 +19,7 @@ defmodule ExPesa.Mpesa.AccountBalance do
         mpesa: [
             cert: "",
             balance: [
+                short_code: "",
                 initiator_name: "Safaricom1",
                 password: "Safaricom133",
                 timeout_url: "",
@@ -38,17 +39,9 @@ defmodule ExPesa.Mpesa.AccountBalance do
       - production - set password from the organization portal.
       - sandbox - use your own custom password
 
-  ## Parameters
-
-  attrs: - a map containing:
-  - `command_id` - A unique command passed to the M-Pesa system..
-  - `short_code` - The shortcode of the organisation receiving the transaction.
-  - `remarks` - Comments that are sent along with the transaction.
-  - `account_type` - Organisation receiving the funds.
-
   ## Example
 
-      iex> ExPesa.Mpesa.AccountBalance.request(%{command_id: "AccountBalance", short_code: "602843", remarks: "remarks", account_type: "Customer"})
+      iex> ExPesa.Mpesa.AccountBalance.request()
       {:ok,
         %{
             "ConversationID" => "AG_20201010_00007d6021022d396df6",
@@ -57,34 +50,22 @@ defmodule ExPesa.Mpesa.AccountBalance do
             "ResponseDescription" => "Accept the service request successfully."
         }}
   """
-  @spec request(map()) :: {:error, any()} | {:ok, any()}
-  def request(params) do
+
+  def request() do
     case get_security_credential_for(:balance) do
       nil -> {:error, "cannot generate security_credential due to missing configuration fields"}
-      security_credential -> account_balance(security_credential, params)
+      security_credential -> account_balance(security_credential)
     end
   end
 
-  @doc false
-  def request() do
-    {:error,
-     "Required Parameter missing, 'command_id','short_code', 'remarks','account_reference'"}
-  end
-
-  def account_balance(security_credential, %{
-        command_id: command_id,
-        short_code: short_code,
-        remarks: remarks,
-        account_type: account_type
-      }) do
+  def account_balance(security_credential) do
     payload = %{
       "Initiator" => Application.get_env(:ex_pesa, :mpesa)[:balance][:initiator_name],
       "SecurityCredential" => security_credential,
-      "CommandID" => command_id,
-      "PartyA" => short_code,
+      "CommandID" => "AccountBalance",
+      "PartyA" => Application.get_env(:ex_pesa, :mpesa)[:balance][:short_code],
       "IdentifierType" => 4,
-      "Remarks" => remarks,
-      "AccountType" => account_type,
+      "Remarks" => "Checking account balance",
       "QueueTimeOutURL" => Application.get_env(:ex_pesa, :mpesa)[:balance][:timeout_url],
       "ResultURL" => Application.get_env(:ex_pesa, :mpesa)[:balance][:result_url]
     }

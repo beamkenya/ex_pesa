@@ -16,7 +16,7 @@ defmodule ExPesa.Mpesa.B2B do
   #### B2B - Configuration Parameters
   - `initiator` - This is the credential/username used to authenticate the transaction request.
     Environment
-    - production 
+    - production
       - create a user with api access method (access channel)
       - Enter user name
       - assign business manager role and B2B ORG API initiator role.
