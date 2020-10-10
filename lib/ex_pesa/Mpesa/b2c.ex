@@ -95,7 +95,7 @@ defmodule ExPesa.Mpesa.B2C do
     make_request("/mpesa/b2c/v1/paymentrequest", payload)
   end
 
-  defp b2c_request(_security_credential, %{}) do
+  defp b2c_request(_security_credential, _) do
     {:error, "Required Parameter missing, 'command_id','amount','phone_number', 'remarks'"}
   end
 end
