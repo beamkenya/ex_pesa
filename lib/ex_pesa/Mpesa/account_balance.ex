@@ -58,7 +58,7 @@ defmodule ExPesa.Mpesa.AccountBalance do
     end
   end
 
-  def account_balance(security_credential) do
+  defp account_balance(security_credential) do
     payload = %{
       "Initiator" => Application.get_env(:ex_pesa, :mpesa)[:balance][:initiator_name],
       "SecurityCredential" => security_credential,
