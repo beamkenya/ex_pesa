@@ -93,13 +93,17 @@ defmodule ExPesa.Mpesa.B2B do
     end
   end
 
-  defp b2b_request(security_credential, %{
-         command_id: command_id,
-         amount: amount,
-         receiver_party: receiver_party,
-         remarks: remarks
-       } = params) do
+  defp b2b_request(
+         security_credential,
+         %{
+           command_id: command_id,
+           amount: amount,
+           receiver_party: receiver_party,
+           remarks: remarks
+         } = params
+       ) do
     account_reference = Map.get(params, :account_reference, nil)
+
     payload = %{
       "Initiator" => Application.get_env(:ex_pesa, :mpesa)[:b2b][:initiator_name],
       "SecurityCredential" => security_credential,
@@ -119,7 +123,6 @@ defmodule ExPesa.Mpesa.B2B do
   end
 
   defp b2b_request(_security_credential, _) do
-    {:error,
-     "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks'"}
+    {:error, "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks'"}
   end
 end
