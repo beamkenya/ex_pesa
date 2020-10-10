@@ -16,7 +16,7 @@ defmodule ExPesa.Mpesa.B2B do
   #### B2B - Configuration Parameters
   - `initiator` - This is the credential/username used to authenticate the transaction request.
     Environment
-    - production 
+    - production
       - create a user with api access method (access channel)
       - Enter user name
       - assign business manager role and B2B ORG API initiator role.
@@ -93,19 +93,13 @@ defmodule ExPesa.Mpesa.B2B do
     end
   end
 
-  @doc false
-  def request() do
-    {:error,
-     "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks','account_reference'"}
-  end
-
   defp b2b_request(security_credential, %{
          command_id: command_id,
          amount: amount,
          receiver_party: receiver_party,
-         remarks: remarks,
-         account_reference: account_reference
-       }) do
+         remarks: remarks
+       } = params) do
+    account_reference = Map.get(params, :account_reference, nil)
     payload = %{
       "Initiator" => Application.get_env(:ex_pesa, :mpesa)[:b2b][:initiator_name],
       "SecurityCredential" => security_credential,
@@ -122,5 +116,10 @@ defmodule ExPesa.Mpesa.B2B do
     }
 
     make_request("/mpesa/b2b/v1/paymentrequest", payload)
+  end
+
+  defp b2b_request(_security_credential, _) do
+    {:error,
+     "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks'"}
   end
 end
