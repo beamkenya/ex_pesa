@@ -1,6 +1,6 @@
 <p align="left"><img src="assets/logo.png" width="140"></p>
 
-[![Actions Status](https://github.com/beamkenya/ex_pesa/workflows/Elixir%20CI/badge.svg)](https://github.com/beamkenya/ex_pesa/actions) ![Hex.pm](https://img.shields.io/hexpm/v/ex_pesa) ![Hex.pm](https://img.shields.io/hexpm/dt/ex_pesa)
+[![Actions Status](https://github.com/beamkenya/ex_pesa/workflows/Elixir%20CI/badge.svg)](https://github.com/beamkenya/ex_pesa/actions) ![Hex.pm](https://img.shields.io/hexpm/v/ex_pesa) ![Hex.pm](https://img.shields.io/hexpm/dt/ex_pesa) [![Coverage Status](https://coveralls.io/repos/github/beamkenya/ex_pesa/badge.svg?branch=develop)](https://coveralls.io/github/beamkenya/ex_pesa?branch=develop)
 
 # ExPesa :dollar: :pound: :yen: :euro:
 
