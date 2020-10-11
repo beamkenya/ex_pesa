@@ -21,7 +21,7 @@
 - [x] Mpesa
   - [x] Mpesa Express (STK)
   - [x] STK Transaction Validation
-  - [ ] B2C
+  - [x] B2C
   - [x] B2B
   - [x] C2B
   - [ ] Reversal
