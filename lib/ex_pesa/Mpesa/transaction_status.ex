@@ -10,25 +10,6 @@ defmodule ExPesa.Mpesa.TransactionStatus do
   Transaction Status Query
   ## Requirement Params
   - `CommandID`[String] - Takes only 'TransactionStatusQuery' command id
-<<<<<<< HEAD
-  - `PartyA` [Numeric] - Organization/MSISDN receiving the transaction, can be
-    -Shortcode (6 digits)
-    -MSISDN (12 Digits)
-  - `IdentifierType` [Numeric] - Type of organization receiving the transaction can be the folowing:
-      1 – MSISDN
-      2 – Till Number
-      4 – Organization short code
-  - `Remarks`[String] - Comments that are sent along with the transaction, can be a sequence of characters up to 100
-  - `Initiator` [Alpha-Numeric] - The name of Initiator to initiating  the request. This is the credential/username
-  used to authenticate the transaction request
-  - `SecurityCredential` [String] - Encrypted Credential of user getting transaction amount	String
-  Encrypted password for the initiator to authenticate the transaction request
-  - `QueueTimeOutURL` [URL] - The path that stores information of time out transaction. Takes the form of
-  https://ip or domain:port/path
-  - `ResultURL`[URL] - The path that stores information of transaction. Example https://ip or domain:port/path
-  - `TransactionID` [Alpha-Numeric] - Unique identifier to identify a transaction on M-Pesa	Alpha-Numeric	LKXXXX1234
-  -  `Occasion` [ String] -  Optional Parameter 	String	sequence of characters up to 100
-=======
   - `timeout_url` [URL] - The path that stores information of time out transaction. Takes the form of
   https://ip or domain:port/path
   - `result_url`[URL] - The path that stores information of transaction. Example https://ip or domain:port/path
@@ -61,24 +42,10 @@ defmodule ExPesa.Mpesa.TransactionStatus do
     Environment
       - production - set password from the organization portal.
       - sandbox - use your own custom password
->>>>>>> 0a47c067fdc264fa7ba48dab95c8cc5fca5f1200
-
 
   ## Parameters
   The following are the parameters required for this method, the rest are fetched from config
   files.
-<<<<<<< HEAD
-  - `occasion`:
-  - `party_a`:
-  - `identifier_type``
-  - `remarks``
-  - `transaction_id`
-  Their details have been covered above in the documentation.
-
-  ## Example
-
-      iex> ExPesa.Mpesa.TransactionStatus.request(%{occasion: "Some Occasion",party_a: "600247",identifier_type: "4",remarks: "CustomerPayBillOnline",transaction_id: "SOME7803"})
-=======
 
   - `transaction_id` [Alpha-Numeric] - Unique identifier to identify a transaction on M-Pesa	Alpha-Numeric	LKXXXX1234
    - `receiver_party` [Numeric] - Organization/MSISDN receiving the transaction, can be
@@ -94,7 +61,6 @@ defmodule ExPesa.Mpesa.TransactionStatus do
   ## Example
 
       iex> ExPesa.Mpesa.TransactionStatus.request(%{transaction_id: "SOME7803", receiver_party: "600247", identifier_type: 4, remarks: "TransactionReversal",  occasion: "TransactionReversal"})
->>>>>>> 0a47c067fdc264fa7ba48dab95c8cc5fca5f1200
       {:ok,
         %{
             "ConversationID" => "AG_20201010_000056be35a7b266b43e",
@@ -106,35 +72,12 @@ defmodule ExPesa.Mpesa.TransactionStatus do
 
   """
   def request(params) do
-<<<<<<< HEAD
-    case get_security_credential_for(:b2b) do
-=======
     case get_security_credential_for(:transaction_status) do
->>>>>>> 0a47c067fdc264fa7ba48dab95c8cc5fca5f1200
       nil -> {:error, "cannot generate security_credential due to missing configuration fields"}
       security_credential -> query(security_credential, params)
     end
   end
 
-<<<<<<< HEAD
-  @doc false
-  def request() do
-    {:error,
-     "Some Required Parameter missing, check whether you have 'occasion', 'party_a', 'identifier_type', 'remarks',  and 'transaction_id'"}
-  end
-
-  @spec request(map()) :: {:error, any()} | {:ok, any()}
-  defp query(security_credential, %{
-         occasion: occasion,
-         transaction_id: transaction_id,
-         party_a: party_a,
-         identifier_type: identifier_type,
-         remarks: remarks
-       }) do
-    payload = %{
-      "CommandID" => "TransactionStatusQuery",
-      "PartyA" => party_a,
-=======
   defp query(
          security_credential,
          %{
@@ -149,7 +92,6 @@ defmodule ExPesa.Mpesa.TransactionStatus do
     payload = %{
       "CommandID" => "TransactionStatusQuery",
       "PartyA" => receiver_party,
->>>>>>> 0a47c067fdc264fa7ba48dab95c8cc5fca5f1200
       "IdentifierType" => identifier_type,
       "Remarks" => remarks,
       "SecurityCredential" => security_credential,
@@ -163,12 +105,9 @@ defmodule ExPesa.Mpesa.TransactionStatus do
 
     make_request("/mpesa/transactionstatus/v1/query", payload)
   end
-<<<<<<< HEAD
-=======
 
   defp query(_security_credential, _) do
     {:error,
      "Some Required Parameter missing, check whether you have 'transaction_id', 'receiver_party', 'identifier_type', 'remarks'"}
   end
->>>>>>> 0a47c067fdc264fa7ba48dab95c8cc5fca5f1200
 end
