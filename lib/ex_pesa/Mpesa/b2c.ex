@@ -1,8 +1,8 @@
 defmodule ExPesa.Mpesa.B2c do
   @moduledoc """
-    Business to Customer (B2C) API enables the Business or organization to pay its customers who are the end-users of its products or services. 
-    Currently, the B2C API allows the org to perform around 3 types of transactions: SalaryPayments, BusinessPayments or Promotion payments. 
-    Salary payments are used by organizations paying their employees via M-Pesa, Business Payments are normal business transactions to customers 
+    Business to Customer (B2C) API enables the Business or organization to pay its customers who are the end-users of its products or services.
+    Currently, the B2C API allows the org to perform around 3 types of transactions: SalaryPayments, BusinessPayments or Promotion payments.
+    Salary payments are used by organizations paying their employees via M-Pesa, Business Payments are normal business transactions to customers
     e.g. bank transfers to mobile, Promotion payments are payments made by organization carrying out promotional services e.g.
      betting companies paying out winnings to clients
   """
@@ -15,7 +15,7 @@ defmodule ExPesa.Mpesa.B2c do
 
   ## Configuration
   Add below config to dev.exs / prod.exs files
-  This assumes you have a clear understanding of how Daraja API works. See docs here https://developer.safaricom.co.ke/docs#account-balance-api
+
   `config.exs`
   ```elixir
     config :ex_pesa,
