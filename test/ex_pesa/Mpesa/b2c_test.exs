@@ -1,12 +1,12 @@
-defmodule ExPesa.Mpesa.B2BTest do
+defmodule ExPesa.Mpesa.B2CTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Tesla.Mock
-  doctest ExPesa.Mpesa.B2B
+  doctest ExPesa.Mpesa.B2c
 
-  alias ExPesa.Mpesa.B2B
+  alias ExPesa.Mpesa.B2c
 
   setup do
     mock(fn
@@ -23,14 +23,14 @@ defmodule ExPesa.Mpesa.B2BTest do
         }
 
       %{
-        url: "https://sandbox.safaricom.co.ke/mpesa/b2b/v1/paymentrequest",
+        url: "https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest",
         method: :post
       } ->
         %Tesla.Env{
           status: 200,
           body: %{
-            "ConversationID" => "AG_20200927_00007d4c98884c889b25",
-            "OriginatorConversationID" => "27274-37744848-4",
+            "ConversationID" => "AG_20201010_00006bd489ffcaf79e91",
+            "OriginatorConversationID" => "27293-71728391-3",
             "ResponseCode" => "0",
             "ResponseDescription" => "Accept the service request successfully."
           }
@@ -40,25 +40,24 @@ defmodule ExPesa.Mpesa.B2BTest do
     :ok
   end
 
-  describe "Mpesa B2B" do
-    test "request/1 should Initiate a B2B request" do
+  describe "Mpesa B2C" do
+    test "request/1 should Initiate a B2C request" do
       payment_details = %{
         command_id: "BusinessPayBill",
         amount: 10500,
-        receiver_party: 600_000,
-        remarks: "B2B Request",
-        account_reference: "BILL PAYMENT"
+        phone_number: "254722000000",
+        remarks: "B2C Request"
       }
 
-      {:ok, result} = B2B.request(payment_details)
+      {:ok, result} = B2c.request(payment_details)
 
       assert result["ResponseCode"] == "0"
     end
 
     test "request/1 should error out without required parameter" do
-      {:error, result} = B2B.request(%{})
+      {:error, result} = B2c.request(%{})
 
-      "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks'" = result
+      "Required Parameter missing, 'command_id','amount','phone_number', 'remarks'" = result
     end
   end
 end
