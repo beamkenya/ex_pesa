@@ -6,10 +6,6 @@ defmodule ExPesa.Mpesa.TokenServerTest do
   alias ExPesa.Mpesa.TokenServer
   alias ExPesa.Mpesa.MpesaBase
 
-  #   setup do
-  #     start_supervised!(TokenServer)
-  #   end
-
   setup do
     mock(fn
       %{
@@ -26,6 +22,10 @@ defmodule ExPesa.Mpesa.TokenServerTest do
     end)
 
     :ok
+  end
+
+  test "starts OTP server" do
+    TokenServer.start_link()
   end
 
   test "stores and retrieves token" do
