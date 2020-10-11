@@ -18,8 +18,6 @@
 
 ## Features
 
-[WIP]
-
 - [x] Mpesa
   - [x] Mpesa Express (STK)
   - [x] STK Transaction Validation
@@ -27,7 +25,7 @@
   - [x] B2B
   - [x] C2B
   - [ ] Reversal
-  - [ ] Transaction Status
+  - [x] Transaction Status
   - [x] Account Balance
 - [ ] JengaWS(Equity)
   - [ ] Send Money
