@@ -21,27 +21,50 @@ defmodule ExPesa.Mpesa.Reversal do
 
   ## Options
   Because reversal can be done for B2B, B2C or C2B, this function allows for an option to load the configs from.
-  It defaults to `:standalone` which means the config to use will be the `:reversal` under the `:mpesa` config.
-  In order to reuse the configs for the other apis, use the parent key under the mpesa config. 
+  It defaults to `:reversal` which means it will use config under the `:mpesa` config.
+  In order to reuse the configs for the other apis, use the parent key under the mpesa config.
   For example, in order to use the `b2b` configs, pass in `:b2b` as the option
+  ## Configuration
+  Add below config to dev.exs / prod.exs files
+
+  `config.exs`
+  ```elixir
+    config :ex_pesa,
+        mpesa: [
+            cert: "",
+            reversal: [
+              short_code: "",
+              initiator_name: "",
+              password: "",
+              timeout_url: "",
+              result_url: "",
+              security_credential: ""
+          ]
+        ]
+  ```
+
+  To generate security_credential, head over to https://developer.safaricom.co.ke/test_credentials, then Initiator Security Password for your environment.
+  Alternatively, generate security credential using certificate
+    `cert` - This is the M-Pesa public key certificate used to encrypt your plain password.
+    There are 2 types of certificates.
+      - sandox - https://developer.safaricom.co.ke/sites/default/files/cert/cert_sandbox/cert.cer .
+      - production - https://developer.safaricom.co.ke/sites/default/files/cert/cert_prod/cert.cer .
+    `password` - This is a plain unencrypted password.
+    Environment
+      - production - set password from the organization portal.
+      - sandbox - use your own custom password
+
+  ## Example
+      iex> ExPesa.Mpesa.Reversal.reverse(%{amount: 30, transaction_id: "LGR013H3J2"}, :reversal)
+      {:ok,
+        %{
+           "ConversationID" => "AG_20201011_00006511c0024c170286",
+          "OriginatorConversationID" => "8094-41340768-1",
+          "ResponseCode" => "0",
+          "ResponseDescription" => "Accept the service request successfully."
+        }}
   """
-  def reverse(params, option \\ :standalone)
-
-  def reverse(%{transaction_id: _trans_id, amount: _amount} = params, :standalone) do
-    config = Application.get_env(:ex_pesa, :mpesa)[:reversal]
-    credential = Util.get_security_credential_for(:reversal)
-
-    %{
-      security_credential: credential,
-      initiator: config[:initiator_name],
-      receiver_party: config[:shortcode],
-      result_url: config[:result_url],
-      queue_time_out_url: config[:result_url]
-    }
-    |> Map.merge(params)
-    |> reversal_payload()
-    |> request_reversal()
-  end
+  def reverse(params, option \\ :reversal)
 
   def reverse(%{transaction_id: _trans_id, amount: _amount} = params, api) do
     config = Application.get_env(:ex_pesa, :mpesa)[api]
@@ -51,7 +74,7 @@ defmodule ExPesa.Mpesa.Reversal do
     %{
       security_credential: credential,
       initiator: config[:initiator_name],
-      receiver_party: config[:shortcode],
+      receiver_party: config[:short_code],
       result_url: reversal_config[:result_url],
       queue_time_out_url: reversal_config[:timeout_url]
     }
@@ -72,11 +95,11 @@ defmodule ExPesa.Mpesa.Reversal do
       "TransactionID" => params.transaction_id,
       "Amount" => params.amount,
       "ReceiverParty" => params.receiver_party,
-      "RecieverIdentifierType" => "4",
+      "RecieverIdentifierType" => "11",
       "ResultURL" => params.result_url,
       "QueueTimeOutURL" => params.queue_time_out_url,
-      "Remarks" => params[:remarks] || "Payment Reversal",
-      "Occasion" => params[:occasion] || "Payment Reversal"
+      "Remarks" => Map.get(params, :remarks, "Payment Reversal"),
+      "Occasion" => Map.get(params, :occassion, "Payment Reversal")
     }
   end
 

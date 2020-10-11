@@ -29,14 +29,10 @@ defmodule ExPesa.Mpesa.ReversalTest do
           status: 200,
           body:
             Jason.encode!(%{
-              "Result" => %{
-                "ResultType" => 0,
-                "ResultCode" => 0,
-                "ResultDesc" => "The service request has been accepted successfully.",
-                "OriginatorConversationID" => "10819-695089-1",
-                "ConversationID" => "AG_20170727_00004efadacd98a01d15",
-                "TransactionID" => "LGR019G3J2"
-              }
+              "ConversationID" => "AG_20201011_00006511c0024c170286",
+              "OriginatorConversationID" => "8094-41340768-1",
+              "ResponseCode" => "0",
+              "ResponseDescription" => "Accept the service request successfully."
             })
         }
     end)
@@ -48,7 +44,7 @@ defmodule ExPesa.Mpesa.ReversalTest do
     test "reverse/2 makes a successful request" do
       {:ok, result} = Reversal.reverse(%{amount: 30, transaction_id: "LGR013H3J2"})
 
-      assert result["Result"]["ResultCode"] == 0
+      assert result["ResponseCode"] == "0"
     end
 
     test "reverse/2 returns an error if amount is missing" do
