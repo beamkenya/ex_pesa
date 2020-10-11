@@ -29,10 +29,10 @@ defmodule ExPesa.Mpesa.ReversalTest do
           status: 200,
           body:
             Jason.encode!(%{
-                "ConversationID" => "AG_20201011_00006511c0024c170286",
-                "OriginatorConversationID" => "8094-41340768-1",
-                "ResponseCode" => "0",
-                "ResponseDescription" => "Accept the service request successfully."
+              "ConversationID" => "AG_20201011_00006511c0024c170286",
+              "OriginatorConversationID" => "8094-41340768-1",
+              "ResponseCode" => "0",
+              "ResponseDescription" => "Accept the service request successfully."
             })
         }
     end)
