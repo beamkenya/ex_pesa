@@ -95,7 +95,7 @@ defmodule ExPesa.Mpesa.Reversal do
       "TransactionID" => params.transaction_id,
       "Amount" => params.amount,
       "ReceiverParty" => params.receiver_party,
-      "RecieverIdentifierType" => "4",
+      "RecieverIdentifierType" => "11",
       "ResultURL" => params.result_url,
       "QueueTimeOutURL" => params.queue_time_out_url,
       "Remarks" => Map.get(params, :remarks, "Payment Reversal"),
