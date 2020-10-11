@@ -5,7 +5,7 @@ defmodule ExPesa.MixProject do
     [
       app: :ex_pesa,
       version: "0.1.0",
-      elixir: "~> 1.9",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       description: "Payment Library For Most Public Payment API's in Kenya and hopefully Africa.",
       package: package(),
@@ -20,6 +20,13 @@ defmodule ExPesa.MixProject do
         logo: "assets/logo.png",
         assets: "assets",
         extras: ["README.md", "contributing.md"]
+      ],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
       ]
     ]
   end
@@ -52,7 +59,8 @@ defmodule ExPesa.MixProject do
       {:hackney, "~> 1.16.0"},
       {:jason, ">= 1.0.0"},
       {:timex, "~> 3.6.2"},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 end
