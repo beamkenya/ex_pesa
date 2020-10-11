@@ -4,41 +4,53 @@ defmodule ExPesa.MixProject do
   def project do
     [
       app: :ex_pesa,
-      version: "0.1.0",
-      elixir: "~> 1.9",
+      version: "0.1.1",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
-      description: "This is a Payments Library",
+      description: "Payment Library For Most Public Payment API's in Kenya and hopefully Africa.",
       package: package(),
       deps: deps(),
-      name: "ex_pesa",
+      name: "ExPesa",
       source_url: "https://github.com/beamkenya/ex_pesa.git",
-      homepage_url: "https://hexdocs.pm/ex_pesa/ExPesa.html",
       docs: [
         # The main page in the docs
-        main: "ex_pesa",
-        # logo:
-        #   "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1200px-M-PESA_LOGO-01.svg.png",
-        extras: ["README.md"]
+        main: "readme",
+        canonical: "http://hexdocs.pm/at_ex",
+        source_url: "https://github.com/beamkenya/ex_pesa.git",
+        logo: "assets/logo.png",
+        assets: "assets",
+        extras: ["README.md", "contributing.md"]
+      ],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
       ]
     ]
   end
 
   defp package do
     [
-      maintainers: ["Beam Kenya"],
+      name: "ex_pesa",
+      maintainers: [
+        "Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth "
+      ],
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/beamkenya/ex_pesa.git",
-        "Documentation" => "https://hexdocs.pm/ex_pesa/ExPesa.html",
         "README" => "https://hexdocs.pm/ex_pesa/readme.html"
-      }
+      },
+      homepage_url: "https://github.com/elixirkenya/africastalking-elixir"
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {ExPesa.Application, []}
     ]
   end
 
@@ -46,10 +58,11 @@ defmodule ExPesa.MixProject do
   defp deps do
     [
       {:tesla, "~> 1.3.0"},
-      {:hackney, "~> 1.15.2"},
+      {:hackney, "~> 1.16.0"},
       {:jason, ">= 1.0.0"},
       {:timex, "~> 3.6.2"},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 end

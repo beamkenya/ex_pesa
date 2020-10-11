@@ -23,3 +23,5 @@ erl_crash.dump
 ex_pesa-*.tar
 
 config/dev.exs
+/.vscode
+/.DS_Store

@@ -1,0 +1,33 @@
+name: Elixir Coveralls
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  coveralls-coverage:
+
+    runs-on: ubuntu-latest
+    env:
+      MIX_ENV: test
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Create dev file
+      run: mv config/dev.sample.exs config/dev.exs
+    - name: Setup elixir
+      uses: actions/setup-elixir@v1
+      with:
+        elixir-version: '1.9.4'
+        otp-version: '22.2'
+    - name: Install Dependencies
+      run: mix deps.get
+    - name: Coverals Coverage
+      run: mix coveralls.github

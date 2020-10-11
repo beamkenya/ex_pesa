@@ -2,6 +2,7 @@ defmodule ExPesa.Mpesa.MpesaBase do
   @moduledoc false
 
   import ExPesa.Util
+  alias ExPesa.Mpesa.TokenServer
 
   @live "https://api.safaricom.co.ke"
   @sandbox "https://sandbox.safaricom.co.ke"
@@ -24,7 +25,21 @@ defmodule ExPesa.Mpesa.MpesaBase do
   end
 
   def token(client) do
-    Tesla.get(client, "/oauth/v1/generate?grant_type=client_credentials") |> get_token
+    {token, datetime} = TokenServer.get()
+
+    if DateTime.compare(datetime, DateTime.utc_now()) !== :gt do
+      case Tesla.get(client, "/oauth/v1/generate?grant_type=client_credentials") |> get_token do
+        {:ok, token} ->
+          #  added 3550 secs, 50 less normal 3600 in 1 hr
+          TokenServer.insert({token, DateTime.add(DateTime.utc_now(), 3550, :second)})
+          {:ok, token}
+
+        {:error, message} ->
+          {:error, message}
+      end
+    else
+      {:ok, token}
+    end
   end
 
   @doc false
