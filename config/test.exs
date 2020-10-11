@@ -19,5 +19,12 @@ config :ex_pesa,
       result_url: "https://58cb49b30213.ngrok.io/b2b/result_url",
       #   Leace blank to increase util test coverage
       security_credential: ""
+    ],
+    transaction_status: [
+      initiator_name: "John Doe",
+      password: "Safaricom133",
+      timeout_url: "https://58cb49b30213.ngrok.io/transaction/timeout_url",
+      result_url: "https://58cb49b30213.ngrok.io/transaction/result_url",
+      security_credential: ""
     ]
   ]

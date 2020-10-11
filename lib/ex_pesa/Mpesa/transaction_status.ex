@@ -10,38 +10,58 @@ defmodule ExPesa.Mpesa.TransactionStatus do
   Transaction Status Query
   ## Requirement Params
   - `CommandID`[String] - Takes only 'TransactionStatusQuery' command id
-  - `PartyA` [Numeric] - Organization/MSISDN receiving the transaction, can be
-    -Shortcode (6 digits)
-    -MSISDN (12 Digits)
-  - `IdentifierType` [Numeric] - Type of organization receiving the transaction can be the folowing:
-      1 – MSISDN
-      2 – Till Number
-      4 – Organization short code
-  - `Remarks`[String] - Comments that are sent along with the transaction, can be a sequence of characters up to 100
+  - `timeout_url` [URL] - The path that stores information of time out transaction. Takes the form of
+  https://ip or domain:port/path
+  - `result_url`[URL] - The path that stores information of transaction. Example https://ip or domain:port/path
   - `Initiator` [Alpha-Numeric] - The name of Initiator to initiating  the request. This is the credential/username
   used to authenticate the transaction request
-  - `SecurityCredential` [String] - Encrypted Credential of user getting transaction amount	String
-  Encrypted password for the initiator to authenticate the transaction request
-  - `QueueTimeOutURL` [URL] - The path that stores information of time out transaction. Takes the form of
-  https://ip or domain:port/path
-  - `ResultURL`[URL] - The path that stores information of transaction. Example https://ip or domain:port/path
-  - `TransactionID` [Alpha-Numeric] - Unique identifier to identify a transaction on M-Pesa	Alpha-Numeric	LKXXXX1234
-  -  `Occasion` [ String] -  Optional Parameter 	String	sequence of characters up to 100
+
+   - `security credential` - To generate security_credential, head over to https://developer.safaricom.co.ke/test_credentials, then Initiator Security Password for your environment.
+
+    `config.exs`
+    ```elixir
+      config :ex_pesa,
+          mpesa: [
+              cert: "",
+              transaction_status: [
+                initiator_name: "",
+                password: "",
+                timeout_url: "",
+                result_url: "",
+                security_credential: ""
+              ]
+          ]
+    ```
+
+  Alternatively, generate security credential using certificate
+    `cert` - This is the M-Pesa public key certificate used to encrypt your plain password.
+    There are 2 types of certificates.
+      - sandox - https://developer.safaricom.co.ke/sites/default/files/cert/cert_sandbox/cert.cer .
+      - production - https://developer.safaricom.co.ke/sites/default/files/cert/cert_prod/cert.cer .
+    `password` - This is a plain unencrypted password.
+    Environment
+      - production - set password from the organization portal.
+      - sandbox - use your own custom password
 
 
   ## Parameters
   The following are the parameters required for this method, the rest are fetched from config
   files.
-  - `occasion`:
-  - `party_a`:
-  - `identifier_type``
-  - `remarks``
-  - `transaction_id`
-  Their details have been covered above in the documentation.
+
+  - `transaction_id` [Alpha-Numeric] - Unique identifier to identify a transaction on M-Pesa	Alpha-Numeric	LKXXXX1234
+   - `receiver_party` [Numeric] - Organization/MSISDN receiving the transaction, can be
+    -Shortcode (6 digits)
+    -MSISDN (12 Digits)
+  - `identifier_type` [Numeric] - Type of organization receiving the transaction can be the folowing:
+      1 – MSISDN
+      2 – Till Number
+      4 – Organization short code
+  - `remarks`[String] - Comments that are sent along with the transaction, can be a sequence of characters up to 100
+  -  `occasion` [ String] -  Optional Parameter 	String	sequence of characters up to 100
 
   ## Example
 
-      iex> ExPesa.Mpesa.TransactionStatus.request(%{occasion: "Some Occasion",party_a: "600247",identifier_type: "4",remarks: "CustomerPayBillOnline",transaction_id: "SOME7803"})
+      iex> ExPesa.Mpesa.TransactionStatus.request(%{transaction_id: "SOME7803", receiver_party: "600247", identifier_type: 4, remarks: "TransactionReversal",  occasion: "TransactionReversal"})
       {:ok,
         %{
             "ConversationID" => "AG_20201010_000056be35a7b266b43e",
@@ -53,29 +73,22 @@ defmodule ExPesa.Mpesa.TransactionStatus do
 
   """
   def request(params) do
-    case get_security_credential_for(:b2b) do
+    case get_security_credential_for(:transaction_status) do
       nil -> {:error, "cannot generate security_credential due to missing configuration fields"}
       security_credential -> query(security_credential, params)
     end
   end
 
-  @doc false
-  def request() do
-    {:error,
-     "Some Required Parameter missing, check whether you have 'occasion', 'party_a', 'identifier_type', 'remarks',  and 'transaction_id'"}
-  end
-
-  @spec request(map()) :: {:error, any()} | {:ok, any()}
   defp query(security_credential, %{
-         occasion: occasion,
          transaction_id: transaction_id,
-         party_a: party_a,
+         receiver_party: receiver_party,
          identifier_type: identifier_type,
          remarks: remarks
-       }) do
+       } = params) do
+    occasion = Map.get(params, :occasion, nil)
     payload = %{
       "CommandID" => "TransactionStatusQuery",
-      "PartyA" => party_a,
+      "PartyA" => receiver_party,
       "IdentifierType" => identifier_type,
       "Remarks" => remarks,
       "SecurityCredential" => security_credential,
@@ -89,4 +102,10 @@ defmodule ExPesa.Mpesa.TransactionStatus do
 
     make_request("/mpesa/transactionstatus/v1/query", payload)
   end
+
+  defp query(_security_credential, _) do
+    {:error,
+     "Some Required Parameter missing, check whether you have 'transaction_id', 'receiver_party', 'identifier_type', 'remarks'"}
+  end
+
 end

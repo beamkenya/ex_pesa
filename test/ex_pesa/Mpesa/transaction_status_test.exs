@@ -41,13 +41,13 @@ defmodule ExPesa.Mpesa.TransactionStatusTest do
   end
 
   describe "Mpesa Transaction Status" do
-    test "request/1 should Initiate a B2B request" do
+    test "request/1 should Initiate a TransactionStatus request" do
       query_details = %{
-        occasion: "Some Occasion",
-        party_a: "600247",
-        identifier_type: "4",
+        transaction_id: "SOME7803",
+        receiver_party: "600247",
+        identifier_type: 4,
         remarks: "CustomerPayBillOnline",
-        transaction_id: "SOME7803"
+        occasion: "TransactionReversal"
       }
 
       {:ok, result} = TransactionStatus.request(query_details)
@@ -56,9 +56,8 @@ defmodule ExPesa.Mpesa.TransactionStatusTest do
     end
 
     test "request/1 should error out without required parameter" do
-      {:error, result} = TransactionStatus.request()
-
-      "Some Required Parameter missing, check whether you have 'occasion', 'party_a', 'identifier_type', 'remarks',  and 'transaction_id'" =
+      {:error, result} = TransactionStatus.request({})
+      "Some Required Parameter missing, check whether you have 'transaction_id', 'receiver_party', 'identifier_type', 'remarks'" =
         result
     end
   end
