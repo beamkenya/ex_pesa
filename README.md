@@ -24,7 +24,7 @@
   - [x] B2C
   - [x] B2B
   - [x] C2B
-  - [ ] Reversal
+  - [x] Reversal
   - [x] Transaction Status
   - [x] Account Balance
 - [ ] JengaWS(Equity)
@@ -45,7 +45,7 @@ by adding `ex_pesa` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_pesa, "~> 0.1.0"}
+    {:ex_pesa, "~> 0.1.1"}
   ]
 end
 ```

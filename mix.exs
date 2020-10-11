@@ -4,7 +4,7 @@ defmodule ExPesa.MixProject do
   def project do
     [
       app: :ex_pesa,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       description: "Payment Library For Most Public Payment API's in Kenya and hopefully Africa.",
@@ -34,7 +34,7 @@ defmodule ExPesa.MixProject do
   defp package do
     [
       name: "ex_pesa",
-      maintainers: ["Paul Oguda, Magak Emmanuel, Frank Midigo, Tracey Onim"],
+      maintainers: ["Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth "],
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/beamkenya/ex_pesa.git",
