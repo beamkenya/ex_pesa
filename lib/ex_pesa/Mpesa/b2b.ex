@@ -93,6 +93,7 @@ defmodule ExPesa.Mpesa.B2B do
     end
   end
 
+<<<<<<< HEAD
   defp b2b_request(
          security_credential,
          %{
@@ -103,6 +104,12 @@ defmodule ExPesa.Mpesa.B2B do
          } = params
        ) do
     account_reference = Map.get(params, :account_reference, nil)
+=======
+  def request() do
+    {:error,
+     "Required Parameter missing, 'command_id','amount','receiver_party', 'remarks','account_reference'"}
+  end
+>>>>>>> b1b9015...  added acount balance
 
     payload = %{
       "Initiator" => Application.get_env(:ex_pesa, :mpesa)[:b2b][:initiator_name],
