@@ -34,9 +34,7 @@ defmodule ExPesa.MixProject do
   defp package do
     [
       name: "ex_pesa",
-      maintainers: [
-        "Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth "
-      ],
+      maintainers: ["Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth "],
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/beamkenya/ex_pesa.git",
