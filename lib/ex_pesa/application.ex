@@ -9,7 +9,7 @@ defmodule ExPesa.Application do
     # List all child processes to be supervised
     children = [
       # Starts a MpesaServer by calling: ExPesa.Mpesa.TokenServer.start_link(arg)
-      ExPesa.Mpesa.TokenServer
+      ExPesa.TokenServer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

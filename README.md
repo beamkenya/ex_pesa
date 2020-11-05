@@ -27,15 +27,19 @@
   - [x] Reversal
   - [x] Transaction Status
   - [x] Account Balance
-- [ ] JengaWS(Equity)
+- [x] JengaWS(Equity)
   - [ ] Send Money
-  - [ ] Receive Payments
+  - [ ] Send Money Queries
+  - [ ] Receive Money
+  - [ ] Receive Money Queries
   - [ ] Buy Goods, Pay Bills, Get Airtime
-  - [ ] Credit
+  - [ ] Airtime
   - [ ] Reg Tech: KYC, AML, & CDD API
   - [ ] Account Services
+  - [ ] Forex Rates
 - [ ] Paypal
 - [ ] Card
+- [ ] iPay
 
 ## Installation
 
@@ -73,6 +77,22 @@ config :ex_pesa,
         mpesa_passkey: "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
         mpesa_callback_url: "http://91eb0af5.ngrok.io/api/payment/callback"
     ]
+```
+
+### Jenga API (Equity)
+
+Jenga API link: https://developer.jengaapi.io/
+
+Add below config to dev.exs / prod.exs files
+This asumes you have a clear understanding of how [Jenga API works](https://developer.jengaapi.io/reference).
+
+```elixir
+config :ex_pesa,
+    jenga: [
+    api_key: "=======API KEY HERE ========",
+    username: "=====USERNAME HERE=====",
+    password: "=======PASSWORD HERE ======="
+  ]
 ```
 
 ## Documentation
