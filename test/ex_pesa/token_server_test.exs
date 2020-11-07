@@ -22,15 +22,13 @@ defmodule ExPesa.Mpesa.TokenServerTest do
         }
 
       %{
-        url: "https://sandbox.jengahq.io/identity-test/v2/token",
+        url: "https://uat.jengahq.io/identity/v2/token",
         method: :post
       } ->
         %Tesla.Env{
           status: 200,
-          body: %{
-            "access_token" => "SGWcJPtNtYNPGm6uSYR9yPYrAI3Bm",
-            "expires_in" => "3599"
-          }
+          body:
+            "\n            {\n                \"token_type\": \"bearer\",\n                \"issued_at\": \"1604754920874\",\n                \"expires_in\": \"3599\",\n                \"access_token\": \"AuPMdNYCJoaPX8seRXAMAXcM1r1e\"\n            }\n        "
         }
     end)
 
@@ -66,7 +64,7 @@ defmodule ExPesa.Mpesa.TokenServerTest do
   test "new token generated at init, :jenga" do
     JengaBase.token(JengaBase.auth_client())
 
-    {:ok, {token, datetime}} = TokenServer.get(:jenga)
+    {:ok, {_token, datetime}} = TokenServer.get(:jenga)
     assert DateTime.compare(datetime, DateTime.utc_now()) === :gt
   end
 

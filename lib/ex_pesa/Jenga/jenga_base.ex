@@ -5,7 +5,7 @@ defmodule ExPesa.Jenga.JengaBase do
   alias ExPesa.TokenServer
 
   @live "https://jengahq.io/identity/v2"
-  @sandbox "https://sandbox.jengahq.io/identity-test/v2"
+  @sandbox "https://uat.jengahq.io/identity/v2"
 
   def auth_client() do
     middleware = [
@@ -63,6 +63,7 @@ defmodule ExPesa.Jenga.JengaBase do
 
   @doc false
   def get_token({:ok, %{status: 200, body: body} = _response}) do
+    {:ok, body} = Jason.decode(body)
     {:ok, body["access_token"]}
   end
 
