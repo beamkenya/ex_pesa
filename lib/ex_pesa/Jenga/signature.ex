@@ -1,5 +1,4 @@
 defmodule ExPesa.Jenga.Signature do
-
   @moduledoc """
   ## signatures
 
@@ -37,13 +36,16 @@ defmodule ExPesa.Jenga.Signature do
         country_code: country_code,
         account_id: account_id
       }) do
-        today = NaiveDateTime.add(NaiveDateTime.utc_now(), (3600 * 3))
-        date = [today.year, today.month, today.day]
-              |> Enum.map(&to_string/1)
-              |> Enum.map(&String.pad_leading(&1, 2, "0"))
-              |> Enum.join("-")
-        message = "#{account_id}#{country_code}#{date}"
-        sign(message)
+    today = NaiveDateTime.add(NaiveDateTime.utc_now(), 3600 * 3)
+
+    date =
+      [today.year, today.month, today.day]
+      |> Enum.map(&to_string/1)
+      |> Enum.map(&String.pad_leading(&1, 2, "0"))
+      |> Enum.join("-")
+
+    message = "#{account_id}#{country_code}#{date}"
+    sign(message)
   end
 
   def sign(message) do
@@ -64,5 +66,4 @@ defmodule ExPesa.Jenga.Signature do
 
     :base64.encode(signature)
   end
-
 end

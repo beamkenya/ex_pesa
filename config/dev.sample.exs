@@ -60,5 +60,5 @@ config :ex_pesa,
     api_key: "=======API KEY HERE ========",
     username: "=====USERNAME HERE=====",
     password: "=======PASSWORD HERE =======",
-    private_key: "=======PRIVATE KEY HERE =======",
+    private_key: "=======PRIVATE KEY HERE ======="
   ]

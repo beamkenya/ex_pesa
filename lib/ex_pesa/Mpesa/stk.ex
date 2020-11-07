@@ -5,6 +5,7 @@ defmodule ExPesa.Mpesa.Stk do
 
   import ExPesa.Mpesa.MpesaBase
   import ExPesa.Util
+
   @doc """
   Initiates the Mpesa Lipa Online STK Push .
 
