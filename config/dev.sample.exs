@@ -59,5 +59,6 @@ config :ex_pesa,
   jenga: [
     api_key: "=======API KEY HERE ========",
     username: "=====USERNAME HERE=====",
-    password: "=======PASSWORD HERE ======="
+    password: "=======PASSWORD HERE =======",
+    private_key: "=======PRIVATE KEY HERE =======",
   ]

@@ -62,4 +62,13 @@ defmodule ExPesa.Util do
         securityCredential
     end
   end
+
+  def generate_timestamp do
+    today = NaiveDateTime.add(NaiveDateTime.utc_now(), (3600 * 3))
+    timestamp = [today.year, today.month, today.day, today.hour, today.minute, today.second]
+                  |> Enum.map(&to_string/1)
+                  |> Enum.map(&String.pad_leading(&1, 2, "0"))
+                  |> Enum.join("")
+    {:ok, timestamp}
+  end
 end

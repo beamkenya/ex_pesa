@@ -60,7 +60,6 @@ defmodule ExPesa.MixProject do
       {:tesla, "~> 1.3.0"},
       {:hackney, "~> 1.16.0"},
       {:jason, ">= 1.0.0"},
-      {:timex, "~> 3.6.2"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
