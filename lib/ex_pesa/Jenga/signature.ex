@@ -36,13 +36,7 @@ defmodule ExPesa.Jenga.Signature do
         country_code: country_code,
         account_id: account_id
       }) do
-    today = NaiveDateTime.add(NaiveDateTime.utc_now(), 3600 * 3)
-
-    date =
-      [today.year, today.month, today.day]
-      |> Enum.map(&to_string/1)
-      |> Enum.map(&String.pad_leading(&1, 2, "0"))
-      |> Enum.join("-")
+    date = Date.utc_today() |> Date.to_string()
 
     message = "#{account_id}#{country_code}#{date}"
     sign(message)
