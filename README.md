@@ -81,18 +81,22 @@ config :ex_pesa,
 
 ### Jenga API (Equity)
 
-Jenga API link: https://developer.jengaapi.io/
+Jenga API link: https://developer.jengaapi.io
 
-Add below config to dev.exs / prod.exs files
-This asumes you have a clear understanding of how [Jenga API works](https://developer.jengaapi.io/reference).
+Add below config to dev.exs / prod.exs files. <br>
+This asumes you have a clear understanding of how [Jenga API works](https://developer.jengaapi.io/reference). <br>
+
+Read more about how the token is generted here: https://developer.jengaapi.io/docs/developer-quickstart . <br>
+The `private_key` is used to generate the `signature`. READ More: https://developer.jengaapi.io/docs/generating-signatures .
 
 ```elixir
 config :ex_pesa,
     jenga: [
-    api_key: "=======API KEY HERE ========",
-    username: "=====USERNAME HERE=====",
-    password: "=======PASSWORD HERE ======="
-  ]
+        api_key: "=======API KEY HERE ========",
+        username: "=====USERNAME HERE=====",
+        password: "=======PASSWORD HERE =======",
+        private_key: "=======PRIVATE KEY HERE ======="
+    ]
 ```
 
 ## Documentation

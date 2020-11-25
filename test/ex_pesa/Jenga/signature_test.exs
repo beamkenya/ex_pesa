@@ -17,6 +17,11 @@ defmodule ExPesa.Jenga.SignatureTest do
 
     signature = Signature.sign(message) |> :base64.decode()
 
+    Signature.sign_transaction(%{
+      country_code: "country_code",
+      account_id: "account_id"
+    })
+
     assert true == :public_key.verify(message, :sha256, signature, public_key)
   end
 end

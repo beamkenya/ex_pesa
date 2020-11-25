@@ -27,6 +27,7 @@ defmodule ExPesa.Jenga.Signature do
   """
 
   @doc """
+  This is a example for signing of Opening and Closing Account Balance API.
   read more on https://developer.jengaapi.io/docs/generating-signatures
   Example
     ExPesa.Jenga.Signature.sign_transaction(%{country_code: "KE", account_id: "0011547896523"})
