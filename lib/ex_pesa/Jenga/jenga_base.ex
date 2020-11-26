@@ -4,8 +4,8 @@ defmodule ExPesa.Jenga.JengaBase do
   import ExPesa.Util
   alias ExPesa.TokenServer
 
-  @live "https://jengahq.io/identity/v2"
-  @sandbox "https://uat.jengahq.io/identity/v2"
+  @live "https://jengahq.io"
+  @sandbox "https://uat.jengahq.io"
 
   def auth_client() do
     middleware = [
@@ -36,7 +36,7 @@ defmodule ExPesa.Jenga.JengaBase do
   end
 
   defp generate_token(client) do
-    case Tesla.post(client, "/token", %{
+    case Tesla.post(client, "/identity/v2/token", %{
            "username" => Application.get_env(:ex_pesa, :jenga)[:username],
            "password" => Application.get_env(:ex_pesa, :jenga)[:password]
          })
@@ -82,7 +82,8 @@ defmodule ExPesa.Jenga.JengaBase do
   def make_request(url, body, headers \\ []) do
     case token(auth_client()) do
       {:ok, token} ->
-        Tesla.post(client(token, headers), url, body) |> process_result
+        Tesla.post(client(token, headers), url, body, opts: [adapter: [recv_timeout: 30_000]])
+        |> process_result
 
       {:error, message} ->
         {:error, message}
@@ -98,15 +99,11 @@ defmodule ExPesa.Jenga.JengaBase do
 
   def process_result({:ok, %{status: 200} = res}) do
     if is_map(res.body) do
-      {:ok, res.body}
-    else
-      Jason.decode(res.body)
-    end
-  end
-
-  def process_result({:ok, %{status: 201} = res}) do
-    if is_map(res.body) do
-      {:ok, res.body}
+      if Map.has_key?(res.body, "response_status") && res.body["response_status"] === "error" do
+        {:error, %{message: res.body}}
+      else
+        {:ok, res.body}
+      end
     else
       Jason.decode(res.body)
     end
