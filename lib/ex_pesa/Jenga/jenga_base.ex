@@ -80,9 +80,13 @@ defmodule ExPesa.Jenga.JengaBase do
 
   # ? headers will be used to pass the signatures in header
   def make_request(url, body, headers \\ []) do
-    case token(auth_client()) do
+    auth_client()
+    |> token()
+    |> case do
       {:ok, token} ->
-        Tesla.post(client(token, headers), url, body, opts: [adapter: [recv_timeout: 30_000]])
+        token
+        |> client(headers)
+        |> Tesla.post(url, body, opts: [adapter: [recv_timeout: 30_000]])
         |> process_result
 
       {:error, message} ->
