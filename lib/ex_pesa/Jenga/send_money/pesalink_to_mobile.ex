@@ -54,7 +54,7 @@ defmodule ExPesa.Jenga.SendMoney.PesalinkToMobile do
       ) do
     message = "#{amount}#{currencyCode}#{reference}#{recipientName}#{accountNumber}"
 
-    make_request("/transaction/v2/remittance#pesalinkacc", requestBody, [
+    make_request("/transaction/v2/remittance#pesalinkmobile", requestBody, [
       {"signature", Signature.sign(message)}
     ])
   end

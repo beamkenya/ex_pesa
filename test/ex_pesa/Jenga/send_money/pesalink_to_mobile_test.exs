@@ -24,7 +24,7 @@ defmodule ExPesa.Jenga.SendMoney.PesalinkToMobileTest do
           """
         }
 
-      %{url: "https://uat.jengahq.io/transaction/v2/remittance#pesalinkacc", method: :post} ->
+      %{url: "https://uat.jengahq.io/transaction/v2/remittance#pesalinkmobile", method: :post} ->
         %Tesla.Env{
           status: 200,
           body: %{
