@@ -1,5 +1,16 @@
 defmodule ExPesa.Jenga.SendMoney.Swift do
-  @moduledoc false
+  @moduledoc """
+  Swift allows sending of money to cross border banks.
+
+  ## Country Codes
+  To lookup the country codes you will use in your application you can visit https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
+
+  ## Bank Codes (BIC and IBAN)
+  To lookup the BIC and IBANs you will use in your application you can visit https://www.theswiftcodes.com/
+
+  ## Currency Codes
+  To lookup the ISO currency code (ISO 4217) you will use in your application you can visit https://en.wikipedia.org/wiki/ISO_4217
+  """
   import ExPesa.Jenga.JengaBase
   alias ExPesa.Jenga.Signature
 
