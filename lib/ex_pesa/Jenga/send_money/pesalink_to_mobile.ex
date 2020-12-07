@@ -36,7 +36,7 @@ defmodule ExPesa.Jenga.SendMoney.PesalinkToMobile do
             accountNumber: accountNumber
           },
           destination: %{
-            type: "bank",
+            type: _destType,
             countryCode: countryCode,
             name: recipientName,
             bankCode: _bankCode,
