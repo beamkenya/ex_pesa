@@ -28,7 +28,7 @@ defmodule ExPesa.Jenga.SendMoney.Swift do
 
   ## Example
 
-      iex> ExPesa.Jenga.SendMoney.Swift.request(%{source: %{countryCode: "KE", name: "John Doe", accountNumber: "0170199741045" }, destination: %{ type: "bank", countryCode: "JP", name: "Tom Doe", bankBic: "BOTKJPJTXXX", accountNumber: "12365489", addressline1: "Post Box 56" }, transfer: %{ type: "SWIFT", amount: "2.00", currencyCode: "USD", reference: "692194625798", date: "2020-12-06", description: "some remarks", chargeOption: "SELF"}})
+      iex> ExPesa.Jenga.SendMoney.Swift.request(%{source: %{countryCode: "KE", name: "John Doe", accountNumber: "0011547896523" }, destination: %{type: "bank", countryCode: "JP", name: "Tom Doe", bankBic: "BOTKJPJTXXX", accountNumber: "12365489", addressline1: "Post Box 56" }, transfer: %{ type: "SWIFT", amount: "2.00", currencyCode: "USD", reference: "692194625798", date: "2020-12-06", description: "some remarks", chargeOption: "SELF"}})
       {:ok,
         %{
           "transactionId" => "1452854",
@@ -55,13 +55,13 @@ defmodule ExPesa.Jenga.SendMoney.Swift do
             amount: amount,
             currencyCode: _currencyCode,
             reference: reference,
-            date: _date,
+            date: date,
             description: _description,
             chargeOption: _chargeOption
           }
         } = requestBody
       ) do
-    message = "#{reference}#{srcAccNo}#{destAccNo}#{amount}"
+    message = "#{reference}#{date}#{srcAccNo}#{destAccNo}#{amount}"
 
     make_request("/transaction/v2/remittance#swift", requestBody, [
       {"signature", Signature.sign(message)}
