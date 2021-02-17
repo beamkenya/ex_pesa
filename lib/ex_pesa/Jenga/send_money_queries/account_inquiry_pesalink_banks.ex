@@ -24,7 +24,7 @@ defmodule ExPesa.Jenga.SendMoneyQueries.AccountInquiryPesalinkBanks do
         }
       }
   """
-  @spec request(map()) :: {:error, any()} | {:ok, any()}
+  @spec request(map()) :: {:error, any()} | {:ok, map()}
   def request(
         %{
           mobileNumber: _t
