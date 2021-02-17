@@ -78,22 +78,67 @@ defmodule ExPesa.Jenga.JengaBase do
     Tesla.client(middleware)
   end
 
-  # ? headers will be used to pass the signatures in header
-  def make_request(url, body, headers \\ []) do
+  def get_client(headers) do
     auth_client()
     |> token()
     |> case do
       {:ok, token} ->
-        token
-        |> client(headers)
-        |> Tesla.post(url, body, opts: [adapter: [recv_timeout: 30_000]])
-        |> process_result
+        client = token |> client(headers)
+        {:ok, client}
 
       {:error, message} ->
         {:error, message}
 
       _ ->
         {:error, 'An Error occurred, try again'}
+    end
+  end
+
+  # ? headers will be used to pass the signatures in header
+  def make_request(url, body, headers \\ []) do
+    get_client(headers)
+    |> case do
+      {:ok, client} ->
+        client
+        |> Tesla.post(url, body, opts: [adapter: [recv_timeout: 30_000]])
+        |> process_result
+
+      {:error, message} ->
+        {:error, message}
+    end
+  end
+
+  @doc """
+  performs `GET` requests.
+  `get_request/2` accepts, parameters encoded url and headers
+  `get_request/3` accepsts, url, body as map and headers
+  """
+  @spec get_request(bitstring(), keyword()) :: {:ok, map()} | {:error, bitstring()}
+  def get_request(url, headers) when is_list(headers) do
+    get_client(headers)
+    |> case do
+      {:ok, client} ->
+        client
+        |> Tesla.get(url, adapter: [recv_timeout: 30_000])
+        |> process_result()
+
+      {:error, message} ->
+        {:error, message}
+    end
+  end
+
+  @spec get_request(bitstring(), map(), keyword()) :: {:ok, map()} | {:error, bitstring()}
+
+  def get_request(url, body, headers \\ []) do
+    get_client(headers)
+    |> case do
+      {:ok, client} ->
+        client
+        |> Tesla.get(url, adapter: [recv_timeout: 30_000], body: body)
+        |> process_result()
+
+      {:error, message} ->
+        {:error, message}
     end
   end
 
