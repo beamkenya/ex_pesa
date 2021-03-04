@@ -49,9 +49,11 @@ defmodule ExPesa.Mpesa.B2c do
     - `phone_number` - Phone number receiving the transaction.
     - `remarks` - Comments that are sent along with the transaction.
     - `occassion` - Optional.
+    - `result_url` - The end-point that receives the response of the transaction. You can customize the result url. 
+                      Defaults to the value passed in the config if not added to params
 
   ## Example
-      iex> ExPesa.Mpesa.B2c.request(%{command_id: "BusinessPayment", amount: 10500, phone_number: "254722000000", remarks: "B2C Request"})
+      iex> ExPesa.Mpesa.B2c.request(%{command_id: "BusinessPayment", amount: 10500, phone_number: "254722000000", remarks: "B2C Request", result_url: "https://58cb49b30213.ngrok.io/b2c/result_url"})
       {:ok,
         %{
           "ConversationID" => "AG_20201010_00006bd489ffcaf79e91",
@@ -77,7 +79,10 @@ defmodule ExPesa.Mpesa.B2c do
            remarks: remarks
          } = params
        ) do
-    occassion = Map.get(params, :occassion, nil)
+    occassion = Map.get(params, :occassion)
+
+    result_url =
+      Map.get(params, :result_url, Application.get_env(:ex_pesa, :mpesa)[:b2c][:result_url])
 
     payload = %{
       "InitiatorName" => Application.get_env(:ex_pesa, :mpesa)[:b2c][:initiator_name],
@@ -88,7 +93,7 @@ defmodule ExPesa.Mpesa.B2c do
       "PartyB" => phone_number,
       "Remarks" => remarks,
       "QueueTimeOutURL" => Application.get_env(:ex_pesa, :mpesa)[:b2c][:timeout_url],
-      "ResultURL" => Application.get_env(:ex_pesa, :mpesa)[:b2c][:result_url],
+      "ResultURL" => result_url,
       "Occassion" => occassion
     }
 
