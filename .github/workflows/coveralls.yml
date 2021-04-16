@@ -27,6 +27,7 @@ jobs:
       with:
         elixir-version: '1.9.4'
         otp-version: '22.2'
+        experimental-otp: true
     - name: Install Dependencies
       run: mix deps.get
     - name: Coverals Coverage
