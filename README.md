@@ -5,6 +5,11 @@
 # ExPesa :dollar: :pound: :yen: :euro:
 
 > Payment Library For Most Public Payment API's in Kenya and hopefully Africa. Let us get this :moneybag:
+## Related Libraries
+
+If you intend to use just one Payment Library included below, there are some which exists as separately, you can check them out before proceeding;
+- [Mpesa Daraja API](https://github.com/beamkenya/ex_mpesa)
+- [Jenga Equity API](https://github.com/beamkenya/ex_jenga)
 
 ## Table of contents
 
