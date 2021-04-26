@@ -42,7 +42,7 @@ defmodule ExPesa.MixProject do
         "GitHub" => "https://github.com/beamkenya/ex_pesa.git",
         "README" => "https://hexdocs.pm/ex_pesa/readme.html"
       },
-      homepage_url: "https://github.com/elixirkenya/africastalking-elixir"
+      homepage_url: "https://github.com/beamkenya/ex_pesa.git"
     ]
   end
 
