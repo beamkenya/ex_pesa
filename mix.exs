@@ -35,7 +35,7 @@ defmodule ExPesa.MixProject do
     [
       name: "ex_pesa",
       maintainers: [
-        "Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth "
+        "Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth, Getty Orawo "
       ],
       licenses: ["MIT"],
       links: %{
