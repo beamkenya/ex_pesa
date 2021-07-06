@@ -55,4 +55,10 @@ config :ex_pesa,
       security_credential:
         "kxlZ1Twlfr6xQru0GId03LbegvuTPelnz3qITkvUJxaCTQt1HaD2hN801Pgbi38x6dEq/hsanBBtfj6JbePayipE/srOyMQ61ieiO+5uHb/JX/NLi1Jy6Alvi0hKbCbq9cVwC/bZBhli7AUAtpfKVgIyXq2InNyfzXpzR8FhrbXiaMhTPJ8WleozPm5CnXe2bFlFP7K0yhCRlT+UOPl7xh0LqU23rMTj3TN/ms600c3j/m2FxQZdmY5/rdORrJeTQV1vw6kXr1QrGaSDSdRMUiaGbg5uPL8LSNwC5bn3M92oPY2cWmkyH9rOzbCN+o5+23TvweaKZlrKuv7etKXMFg=="
     ]
+  ],
+  jenga: [
+    api_key: "=======API KEY HERE ========",
+    username: "=====USERNAME HERE=====",
+    password: "=======PASSWORD HERE =======",
+    private_key: "=======PRIVATE KEY HERE ======="
   ]

@@ -35,14 +35,14 @@ defmodule ExPesa.MixProject do
     [
       name: "ex_pesa",
       maintainers: [
-        "Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth "
+        "Paul Oguda, Magak Emmanuel, Tracey Onim, Anthony Leiro, Frank Midigo, Evans Okoth, Getty Orawo "
       ],
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/beamkenya/ex_pesa.git",
         "README" => "https://hexdocs.pm/ex_pesa/readme.html"
       },
-      homepage_url: "https://github.com/elixirkenya/africastalking-elixir"
+      homepage_url: "https://github.com/beamkenya/ex_pesa.git"
     ]
   end
 
@@ -60,7 +60,6 @@ defmodule ExPesa.MixProject do
       {:tesla, "~> 1.3.0"},
       {:hackney, "~> 1.16.0"},
       {:jason, ">= 1.0.0"},
-      {:timex, "~> 3.6.2"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]

@@ -4,6 +4,7 @@ defmodule ExPesa.Mpesa.Stk do
   """
 
   import ExPesa.Mpesa.MpesaBase
+  import ExPesa.Util
 
   @doc """
   Initiates the Mpesa Lipa Online STK Push .
@@ -54,7 +55,7 @@ defmodule ExPesa.Mpesa.Stk do
       }) do
     paybill = Application.get_env(:ex_pesa, :mpesa)[:mpesa_short_code]
     passkey = Application.get_env(:ex_pesa, :mpesa)[:mpesa_passkey]
-    {:ok, timestamp} = Timex.now() |> Timex.format("%Y%m%d%H%M%S", :strftime)
+    {:ok, timestamp} = generate_timestamp()
     password = Base.encode64(paybill <> passkey <> timestamp)
 
     payload = %{
@@ -120,7 +121,7 @@ defmodule ExPesa.Mpesa.Stk do
   def validate(%{checkout_request_id: checkout_request_id}) do
     paybill = Application.get_env(:ex_pesa, :mpesa)[:mpesa_short_code]
     passkey = Application.get_env(:ex_pesa, :mpesa)[:mpesa_passkey]
-    {:ok, timestamp} = Timex.now() |> Timex.format("%Y%m%d%H%M%S", :strftime)
+    {:ok, timestamp} = generate_timestamp()
     password = Base.encode64(paybill <> passkey <> timestamp)
 
     payload = %{

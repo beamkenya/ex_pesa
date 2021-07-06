@@ -5,6 +5,11 @@
 # ExPesa :dollar: :pound: :yen: :euro:
 
 > Payment Library For Most Public Payment API's in Kenya and hopefully Africa. Let us get this :moneybag:
+## Related Libraries
+
+If you intend to use just one Payment Library included below, there are some which exists as separately, you can check them out before proceeding;
+- [Mpesa Daraja API](https://github.com/beamkenya/ex_mpesa)
+- [Jenga Equity API](https://github.com/beamkenya/ex_jenga)
 
 ## Table of contents
 
@@ -27,15 +32,19 @@
   - [x] Reversal
   - [x] Transaction Status
   - [x] Account Balance
-- [ ] JengaWS(Equity)
+- [x] JengaWS(Equity)
   - [ ] Send Money
-  - [ ] Receive Payments
+  - [ ] Send Money Queries
+  - [ ] Receive Money
+  - [ ] Receive Money Queries
   - [ ] Buy Goods, Pay Bills, Get Airtime
-  - [ ] Credit
+  - [ ] Airtime
   - [ ] Reg Tech: KYC, AML, & CDD API
   - [ ] Account Services
+  - [ ] Forex Rates
 - [ ] Paypal
 - [ ] Card
+- [ ] iPay
 
 ## Installation
 
@@ -72,6 +81,26 @@ config :ex_pesa,
         mpesa_short_code: "174379",
         mpesa_passkey: "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
         mpesa_callback_url: "http://91eb0af5.ngrok.io/api/payment/callback"
+    ]
+```
+
+### Jenga API (Equity)
+
+Jenga API link: https://developer.jengaapi.io
+
+Add below config to dev.exs / prod.exs files. <br>
+This asumes you have a clear understanding of how [Jenga API works](https://developer.jengaapi.io/reference). <br>
+
+Read more about how the token is generted here: https://developer.jengaapi.io/docs/developer-quickstart . <br>
+The `private_key` is used to generate the `signature`. READ More: https://developer.jengaapi.io/docs/generating-signatures .
+
+```elixir
+config :ex_pesa,
+    jenga: [
+        api_key: "=======API KEY HERE ========",
+        username: "=====USERNAME HERE=====",
+        password: "=======PASSWORD HERE =======",
+        private_key: "=======PRIVATE KEY HERE ======="
     ]
 ```
 
